@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indicador de Combustible</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --card-bg: #1e1e1e;
+      --gauge-bg: #000;
+      --accent-red: #ff3b30;
+      --accent-white: #ffffff;
+      --inactive-color: #3a3a3c;
+      --text-color: #f2f2f7;
+      --shadow-color: rgba(0,0,0,0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+      margin: 0;
+    }
+
+    .container {
+      background-color: var(--card-bg);
+      border-radius: 20px;
+      padding: 24px;
+      width: 100%;
+      max-width: 420px; /* Tamaño ideal para escritorio/tablet sin verse gigante */
+      box-shadow: 0 10px 25px var(--shadow-color);
+    }
+
+    h2 { 
+      text-align: center; 
+      margin-top: 0; 
+      font-weight: bold; 
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+    }
+
+    /* Contenedor principal del medidor */
+    .gauge-card {
+      background-color: var(--gauge-bg);
+      border-radius: 16px;
+      padding: 20px 15px;
+      margin-bottom: 24px;
+    }
+
+    /* Contenedor horizontal de las barras (E, barras, F) */
+    .gauge-horiz-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 15px;
+      gap: 10px;
+    }
+
+    /* Estilos para las letras E y F */
+    .gauge-label {
+      font-weight: bold;
+      font-style: italic;
+      font-size: 1.4rem;
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    .label-e { color: var(--accent-red); }
+    .label-f { color: var(--accent-white); }
+
+    /* Fila central de segmentos */
+    .bars-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px; /* Espaciado adaptable */
+      flex-grow: 1;
+      width: 100%;
+    }
+
+    /* Segmentos individuales con tamaño adaptable mediante flex */
+    .segment {
+      flex: 1;
+      max-width: 38px;
+      height: 12px;
+      background-color: var(--inactive-color);
+      border-radius: 3px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Segmentos encendidos con resplandor */
+    .segment.active.reserve { 
+      background-color: var(--accent-red); 
+      box-shadow: 0 0 10px var(--accent-red); 
+    }
+    .segment.active.normal { 
+      background-color: var(--accent-white); 
+      box-shadow: 0 0 10px var(--accent-white); 
+    }
+
+    /* Sección de estadísticas */
+    .stats {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #a1a1a6;
+      margin: 0;
+      word-break: break-word;
+    }
+
+    /* Formularios y Botones */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label { 
+      display: block; 
+      font-size: 0.85rem; 
+      margin-bottom: 8px; 
+      color: #a1a1a6; 
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 12px;
+      border-radius: 10px;
+      border: 1px solid #333;
+      background-color: #2c2c2e;
+      color: white;
+      font-size: 1rem;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input:focus {
+      border-color: #0a84ff;
+    }
+
+    input::placeholder { color: #575757; }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background-color: #0a84ff;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: 1rem;
+      transition: background-color 0.2s, opacity 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:active {
+      opacity: 0.8;
+    }
+
+    button:hover { background-color: #0071e3; }
+    .btn-secondary { background-color: #32d74b; }
+    .btn-secondary:hover { background-color: #28cd41; }
+
+    /* Ajustes específicos para móviles pequeños (ancho menor a 360px) */
+    @media (max-width: 360px) {
+      .container {
+        padding: 16px;
+      }
+
+      .gauge-card {
+        padding: 15px 10px;
+      }
+
+      .bars-row {
+        gap: 5px;
+      }
+
+      .segment {
+        height: 10px;
+      }
+
+      .gauge-label {
+        font-size: 1.2rem;
+      }
+
+      .stats {
+        font-size: 0.78rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Control de Combustible</h2>
+
+  <!-- Medidor Gráfico Recto -->
+  <div class="gauge-card">
+    <div class="gauge-horiz-container">
+      <div class="gauge-label label-e">E</div>
+      
+      <!-- Fila central de segmentos -->
+      <div class="bars-row">
+        <div class="segment reserve" id="seg-1"></div>
+        <div class="segment normal" id="seg-2"></div>
+        <div class="segment normal" id="seg-3"></div>
+        <div class="segment normal" id="seg-4"></div>
+        <div class="segment normal" id="seg-5"></div>
+        <div class="segment normal" id="seg-6"></div>
+      </div>
+      
+      <div class="gauge-label label-f">F</div>
+    </div>
+
+    <!-- Sección de estadísticas -->
+    <div class="stats">
+      <p style="margin:0;">Tanque: <span id="galones-txt">0</span> / <span id="capacidad-txt">0</span> Gal | Km: <span id="km-txt">0</span></p>
+    </div>
+  </div>
+
+  <!-- Controles para actualizar -->
+  <div class="form-group">
+    <label for="input-km">Actualizar Kilometraje Actual</label>
+    <input type="number" id="input-km" placeholder="Ej. 12500" inputmode="numeric">
+    <button onclick="actualizarKm()">Actualizar Kilometraje</button>
+  </div>
+
+  <div class="form-group" style="margin-top: 24px;">
+    <label for="input-galones">Agregar Combustible (Galones)</label>
+    <input type="number" step="0.1" id="input-galones" placeholder="Ej. 2.5" inputmode="decimal">
+    <button class="btn-secondary" onclick="agregarCombustible()">Cargar Tanque</button>
+  </div>
+</div>
+
+<script>
+  // CONFIGURACIÓN INICIAL DEL VEHÍCULO
+  const CONFIG = {
+    capacidadTanque: 2.3,  // Galones totales del tanque
+    kmPorGalon: 110        // Consumo promedio estimado
+  };  
+
+  // 1. Intentar obtener los datos guardados previamente
+  const datosGuardados = localStorage.getItem('estado_combustible');
+
+  // 2. Si existen datos, usarlos; si no (primera vez que abres la página), iniciar con el tanque lleno
+  let estado = datosGuardados ? JSON.parse(datosGuardados) : {
+    galonesActuales: CONFIG.capacidadTanque,
+    kmActual: 0
+  };
+
+  // 3. Control de seguridad: Limitar los galones máximos a la capacidad real configurada
+  if (estado.galonesActuales > CONFIG.capacidadTanque) {
+    estado.galonesActuales = CONFIG.capacidadTanque;
+    localStorage.setItem('estado_combustible', JSON.stringify(estado));
+  }
+
+  function guardarEstado() {
+    localStorage.setItem('estado_combustible', JSON.stringify(estado));
+    renderizar();
+  }
+
+  function actualizarKm() {
+    const nuevoKmVal = document.getElementById('input-km').value;
+    const nuevoKm = parseFloat(nuevoKmVal);
+    
+    if (nuevoKmVal === "" || isNaN(nuevoKm) || nuevoKm < estado.kmActual) {
+      alert("Ingresa un kilometraje válido (mayor o igual al actual).");
+      return;
+    }
+
+    const kmRecorridos = nuevoKm - estado.kmActual;
+    const galonesConsumidos = kmRecorridos / CONFIG.kmPorGalon;
+
+    estado.galonesActuales = Math.max(0, estado.galonesActuales - galonesConsumidos);
+    estado.kmActual = nuevoKm;
+
+    document.getElementById('input-km').value = '';
+    guardarEstado();
+  }
+
+  function agregarCombustible() {
+    const galonesNuevosVal = document.getElementById('input-galones').value;
+    const galonesNuevos = parseFloat(galonesNuevosVal);
+    
+    if (galonesNuevosVal === "" || isNaN(galonesNuevos) || galonesNuevos <= 0) {
+      alert("Ingresa una cantidad válida de galones.");
+      return;
+    }
+
+    estado.galonesActuales = Math.min(CONFIG.capacidadTanque, estado.galonesActuales + galonesNuevos);
+    document.getElementById('input-galones').value = '';
+    guardarEstado();
+  }
+
+  function renderizar() {
+    // Actualizar texto
+    document.getElementById('galones-txt').innerText = estado.galonesActuales.toFixed(1);
+    document.getElementById('capacidad-txt').innerText = CONFIG.capacidadTanque.toFixed(1);
+    document.getElementById('km-txt').innerText = estado.kmActual.toLocaleString('es-CO');
+
+    // Calcular cuántos de los 6 segmentos deben encenderse
+    const porcentaje = estado.galonesActuales / CONFIG.capacidadTanque;
+    const segmentosActivos = Math.ceil(porcentaje * 6);
+
+    for (let i = 1; i <= 6; i++) {
+      const seg = document.getElementById(`seg-${i}`);
+      if (i <= segmentosActivos) {
+        seg.classList.add('active');
+      } else {
+        seg.classList.remove('active');
+      }
+    }
+  }
+
+  // Renderizar al abrir la página
+  renderizar();
+</script>
+
+</body>
+</html>
