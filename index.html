@@ -2,24 +2,38 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Indicador de Combustible</title>
-  <!-- FAVICON SVG INTEGRADO -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Control de Combustible</title>
+   <!-- FAVICON SVG INTEGRADO -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffcc00'><path d='M19.77 7.23l.01-.01-3.72-3.72L15 4.56l2.11 2.11c-.94.36-1.61 1.26-1.61 2.33 0 1.38 1.12 2.5 2.5 2.5.36 0 .69-.08 1-.22v5.72c0 .55-.45 1-1 1s-1-.45-1-1V14c0-1.1-.9-2-2-2h-1V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-3h1c.55 0 1 .45 1 1v2.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V10.5c0-1.33-.53-2.53-1.23-3.27zM11 10H5V5h6v5z'/></svg>">
   <style>
     :root {
       --bg-color: #121212;
       --card-bg: #1e1e1e;
-      --gauge-bg: #000;
+      --gauge-bg: #000000;
       --accent-red: #ff3b30;
       --accent-white: #ffffff;
+      --accent-green: #34c759;
+      --accent-blue: #0a84ff;
       --inactive-color: #3a3a3c;
-      --text-color: #f2f2f7;
-      --shadow-color: rgba(0,0,0,0.5);
+      --text-color: #ffffff;
+      --subtext-color: #a1a1a6;
+      --shadow-color: rgba(0,0,0,0.6);
     }
 
     * {
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      touch-action: manipulation;
     }
 
     body {
@@ -29,177 +43,290 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
       padding: 16px;
-      margin: 0;
     }
 
     .container {
       background-color: var(--card-bg);
       border-radius: 20px;
-      padding: 24px;
+      padding: 24px 20px;
       width: 100%;
-      max-width: 420px; /* Tamaño ideal para escritorio/tablet sin verse gigante */
-      box-shadow: 0 10px 25px var(--shadow-color);
+      max-width: 380px;
+      box-shadow: 0 10px 30px var(--shadow-color);
+      max-height: 95dvh;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
     }
 
     h2 { 
       text-align: center; 
       margin-top: 0; 
-      font-weight: bold; 
+      font-weight: 700; 
       margin-bottom: 20px;
-      font-size: 1.4rem;
+      font-size: 1.35rem;
+      color: var(--text-color);
+      flex-shrink: 0;
     }
 
-    /* Contenedor principal del medidor */
+    /* Medidor Gráfico Flotante Oscuro */
     .gauge-card {
       background-color: var(--gauge-bg);
-      border-radius: 16px;
-      padding: 20px 15px;
-      margin-bottom: 24px;
+      border-radius: 14px;
+      padding: 18px 14px 14px 14px;
+      margin-bottom: 20px;
+      flex-shrink: 0;
     }
 
-    /* Contenedor horizontal de las barras (E, barras, F) */
     .gauge-horiz-container {
       display: flex;
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      margin-bottom: 15px;
-      gap: 10px;
+      margin-bottom: 12px;
+      gap: 8px;
     }
 
-    /* Estilos para las letras E y F */
     .gauge-label {
-      font-weight: bold;
+      font-weight: 800;
       font-style: italic;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       user-select: none;
       flex-shrink: 0;
     }
 
     .label-e { color: var(--accent-red); }
-    .label-f { color: var(--accent-white); }
+    .label-f { color: var(--text-color); }
 
-    /* Fila central de segmentos */
     .bars-row {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 8px; /* Espaciado adaptable */
+      gap: 6px;
       flex-grow: 1;
       width: 100%;
     }
 
-    /* Segmentos individuales con tamaño adaptable mediante flex */
     .segment {
       flex: 1;
-      max-width: 38px;
       height: 12px;
       background-color: var(--inactive-color);
-      border-radius: 3px;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 4px;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    /* Segmentos encendidos con resplandor */
     .segment.active.reserve { 
       background-color: var(--accent-red); 
-      box-shadow: 0 0 10px var(--accent-red); 
+      box-shadow: 0 0 8px var(--accent-red); 
     }
     .segment.active.normal { 
       background-color: var(--accent-white); 
-      box-shadow: 0 0 10px var(--accent-white); 
+      box-shadow: 0 0 8px var(--accent-white); 
     }
 
-    /* Sección de estadísticas */
     .stats {
       text-align: center;
-      font-size: 0.85rem;
-      color: #a1a1a6;
+      font-size: 0.78rem;
+      color: #8e8e93;
       margin: 0;
-      word-break: break-word;
+      letter-spacing: -0.2px;
     }
 
-    /* Formularios y Botones */
+    /* Pestañas estilo iOS */
+    .tabs-header {
+      display: flex;
+      background-color: #2c2c2e;
+      border-radius: 10px;
+      padding: 3px;
+      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 8px 2px;
+      border: none;
+      background: none;
+      color: var(--subtext-color);
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s, color 0.2s;
+      text-align: center;
+    }
+
+    .tab-btn.active {
+      background-color: #3a3a3c;
+      color: var(--text-color);
+    }
+
+    /* Contenido de Pestañas */
+    .tabs-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tab-pane {
+      display: none;
+      height: 100%;
+    }
+
+    .tab-pane.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Formulario */
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     label { 
       display: block; 
-      font-size: 0.85rem; 
+      font-size: 0.82rem; 
       margin-bottom: 8px; 
-      color: #a1a1a6; 
+      color: var(--subtext-color); 
     }
 
     input {
       width: 100%;
-      padding: 14px 12px;
+      padding: 12px 14px;
       border-radius: 10px;
       border: 1px solid #333;
       background-color: #2c2c2e;
       color: white;
-      font-size: 1rem;
+      font-size: 15px;
       outline: none;
       appearance: none;
       -webkit-appearance: none;
     }
 
     input:focus {
-      border-color: #0a84ff;
+      border-color: var(--accent-blue);
     }
 
-    input::placeholder { color: #575757; }
+    input::placeholder {
+      color: #55555d;
+    }
 
-    button {
+    .btn {
       width: 100%;
-      padding: 14px;
+      padding: 13px;
       border: none;
       border-radius: 10px;
-      background-color: #0a84ff;
+      background-color: var(--accent-blue);
       color: white;
-      font-weight: bold;
+      font-weight: 600;
       cursor: pointer;
-      margin-top: 10px;
-      font-size: 1rem;
-      transition: background-color 0.2s, opacity 0.2s;
-      -webkit-tap-highlight-color: transparent;
+      margin-top: 8px;
+      font-size: 0.95rem;
+      transition: opacity 0.2s;
     }
 
-    button:active {
-      opacity: 0.8;
+    .btn:active { opacity: 0.85; }
+    .btn-secondary { background-color: var(--accent-green); }
+
+    /* Listas */
+    .history-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      overflow-y: auto;
+      flex-grow: 1;
     }
 
-    button:hover { background-color: #0071e3; }
-    .btn-secondary { background-color: #32d74b; }
-    .btn-secondary:hover { background-color: #28cd41; }
-
-    /* Ajustes específicos para móviles pequeños (ancho menor a 360px) */
-    @media (max-width: 360px) {
-      .container {
-        padding: 16px;
-      }
-
-      .gauge-card {
-        padding: 15px 10px;
-      }
-
-      .bars-row {
-        gap: 5px;
-      }
-
-      .segment {
-        height: 10px;
-      }
-
-      .gauge-label {
-        font-size: 1.2rem;
-      }
-
-      .stats {
-        font-size: 0.78rem;
-      }
+    .history-item {
+      background-color: #2c2c2e;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
     }
+
+    .history-item .date {
+      color: var(--subtext-color);
+      font-size: 0.75rem;
+    }
+
+    .history-item .qty {
+      font-weight: bold;
+      color: var(--accent-green);
+    }
+
+    .maint-card {
+      background-color: #2c2c2e;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 10px;
+      border-left: 4px solid var(--accent-green);
+    }
+
+    .maint-card.due {
+      border-left-color: var(--accent-red);
+      background-color: #2c1a1a;
+    }
+
+    .maint-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .maint-title {
+      font-weight: bold;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .engine-icon {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      background-color: var(--accent-red);
+      mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 4v2h3v2H7v2H5V8H3v8h2v-2h2v2h3v2H7v2h10v-2h-3v-2h3v-2h2v2h2V8h-2v2h-2V8h-3V6h3V4H7z"/></svg>') no-repeat center;
+      -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 4v2h3v2H7v2H5V8H3v8h2v-2h2v2h3v2H7v2h10v-2h-3v-2h3v-2h2v2h2V8h-2v2h-2V8h-3V6h3V4H7z"/></svg>') no-repeat center;
+    }
+
+    .maint-status {
+      font-size: 0.72rem;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .status-ok { background-color: rgba(52, 199, 89, 0.2); color: var(--accent-green); }
+    .status-alert { background-color: rgba(255, 59, 48, 0.2); color: var(--accent-red); }
+
+    .maint-body {
+      font-size: 0.76rem;
+      color: var(--subtext-color);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .maint-action {
+      margin-top: 8px;
+      background-color: #3a3a3c;
+      border: none;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
   </style>
 </head>
 <body>
@@ -207,12 +334,10 @@
 <div class="container">
   <h2>Control de Combustible</h2>
 
-  <!-- Medidor Gráfico Recto -->
+  <!-- Medidor Oscuro Estilo Captura -->
   <div class="gauge-card">
     <div class="gauge-horiz-container">
       <div class="gauge-label label-e">E</div>
-      
-      <!-- Fila central de segmentos -->
       <div class="bars-row">
         <div class="segment reserve" id="seg-1"></div>
         <div class="segment normal" id="seg-2"></div>
@@ -221,61 +346,92 @@
         <div class="segment normal" id="seg-5"></div>
         <div class="segment normal" id="seg-6"></div>
       </div>
-      
       <div class="gauge-label label-f">F</div>
     </div>
-
-    <!-- Sección de estadísticas -->
     <div class="stats">
-      <p style="margin:0;">Tanque: <span id="galones-txt">0</span> / <span id="capacidad-txt">0</span> Gal | Km: <span id="km-txt">0</span></p>
+      <p style="margin:0;">Tanque: <span id="galones-txt">0.5</span> / <span id="capacidad-txt">2.3</span> Gal | Km: <span id="km-txt">39.355</span></p>
     </div>
   </div>
 
-  <!-- Controles para actualizar -->
-  <div class="form-group">
-    <label for="input-km">Actualizar Kilometraje Actual</label>
-    <input type="number" id="input-km" placeholder="Ej. 12500" inputmode="numeric">
-    <button onclick="actualizarKm()">Actualizar Kilometraje</button>
+  <!-- Pestañas Integradas -->
+  <div class="tabs-header">
+    <button class="tab-btn active" onclick="switchTab('tab-combustible')">Combustible</button>
+    <button class="tab-btn" onclick="switchTab('tab-historial')">Historial Tanqueo</button>
+    <button class="tab-btn" onclick="switchTab('tab-mantenimiento')">Mantenimientos</button>
   </div>
 
-  <div class="form-group" style="margin-top: 24px;">
-    <label for="input-galones">Agregar Combustible (Galones)</label>
-    <input type="number" step="0.1" id="input-galones" placeholder="Ej. 2.5" inputmode="decimal">
-    <button class="btn-secondary" onclick="agregarCombustible()">Cargar Tanque</button>
+  <div class="tabs-content">
+    
+    <!-- Pestaña 1: Control Combustible -->
+    <div id="tab-combustible" class="tab-pane active">
+      <div class="form-group">
+        <label for="input-km">Actualizar Kilometraje Actual</label>
+        <input type="number" id="input-km" placeholder="Ej: 12500" inputmode="numeric">
+        <button class="btn" onclick="actualizarKm()">Actualizar Kilometraje</button>
+      </div>
+
+      <div class="form-group">
+        <label for="input-galones">Agregar Combustible (Galones)</label>
+        <input type="number" step="0.1" id="input-galones" placeholder="Ej: 2.5" inputmode="decimal">
+        <button class="btn btn-secondary" onclick="agregarCombustible()">Cargar Tanque</button>
+      </div>
+    </div>
+
+    <!-- Pestaña 2: Historial de Tanqueo -->
+    <div id="tab-historial" class="tab-pane">
+      <label style="margin-bottom:10px;">Registros con Fecha y Hora</label>
+      <ul class="history-list" id="historial-ul"></ul>
+    </div>
+
+    <!-- Pestaña 3: Mantenimientos -->
+    <div id="tab-mantenimiento" class="tab-pane">
+      <div id="lista-mantenimientos"></div>
+    </div>
+
   </div>
 </div>
 
 <script>
-  // CONFIGURACIÓN INICIAL DEL VEHÍCULO
   const CONFIG = {
-    capacidadTanque: 2.3,  // Galones totales del tanque
-    kmPorGalon: 110        // Consumo promedio estimado
-  };  
-
-  // 1. Intentar obtener los datos guardados previamente
-  const datosGuardados = localStorage.getItem('estado_combustible');
-
-  // 2. Si existen datos, usarlos; si no (primera vez que abres la página), iniciar con el tanque lleno
-  let estado = datosGuardados ? JSON.parse(datosGuardados) : {
-    galonesActuales: CONFIG.capacidadTanque,
-    kmActual: 0
+    capacidadTanque: 2.3,
+    kmPorGalon: 110
   };
 
-  // 3. Control de seguridad: Limitar los galones máximos a la capacidad real configurada
-  if (estado.galonesActuales > CONFIG.capacidadTanque) {
-    estado.galonesActuales = CONFIG.capacidadTanque;
-    localStorage.setItem('estado_combustible', JSON.stringify(estado));
-  }
+  const MANTENIMIENTOS_DEFAULT = [
+    { id: 'aceite', nombre: 'Cambio de Aceite', intervalo: 2000, ultimoKm: 0 },
+    { id: 'cadena', nombre: 'Tensión de Cadena', intervalo: 500, ultimoKm: 0 },
+    { id: 'filtro', nombre: 'Filtro de Aire', intervalo: 6000, ultimoKm: 0 },
+    { id: 'balineras', nombre: 'Balineras', intervalo: 10000, ultimoKm: 0 },
+    { id: 'llantas', nombre: 'Revisión / Cambio Llantas', intervalo: 12000, ultimoKm: 0 }
+  ];
+
+  const datosGuardados = localStorage.getItem('estado_moto_se150');
+  let estado = datosGuardados ? JSON.parse(datosGuardados) : {
+    galonesActuales: 0.5,
+    kmActual: 39355,
+    historial: [],
+    mantenimientos: MANTENIMIENTOS_DEFAULT
+  };
+
+  if (!estado.mantenimientos) estado.mantenimientos = MANTENIMIENTOS_DEFAULT;
 
   function guardarEstado() {
-    localStorage.setItem('estado_combustible', JSON.stringify(estado));
+    localStorage.setItem('estado_moto_se150', JSON.stringify(estado));
     renderizar();
+  }
+
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+
+    event.target.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
   }
 
   function actualizarKm() {
     const nuevoKmVal = document.getElementById('input-km').value;
     const nuevoKm = parseFloat(nuevoKmVal);
-    
+
     if (nuevoKmVal === "" || isNaN(nuevoKm) || nuevoKm < estado.kmActual) {
       alert("Ingresa un kilometraje válido (mayor o igual al actual).");
       return;
@@ -294,24 +450,44 @@
   function agregarCombustible() {
     const galonesNuevosVal = document.getElementById('input-galones').value;
     const galonesNuevos = parseFloat(galonesNuevosVal);
-    
+
     if (galonesNuevosVal === "" || isNaN(galonesNuevos) || galonesNuevos <= 0) {
       alert("Ingresa una cantidad válida de galones.");
       return;
     }
 
     estado.galonesActuales = Math.min(CONFIG.capacidadTanque, estado.galonesActuales + galonesNuevos);
+
+    const ahora = new Date();
+    const fechaHora = ahora.toLocaleDateString('es-CO', {
+      day: '2-digit', month: '2-digit', year: '2-digit'
+    }) + " " + ahora.toLocaleTimeString('es-CO', {
+      hour: '2-digit', minute: '2-digit', hour12: true
+    });
+
+    estado.historial.unshift({
+      fecha: fechaHora,
+      galones: galonesNuevos,
+      km: estado.kmActual
+    });
+
     document.getElementById('input-galones').value = '';
     guardarEstado();
   }
 
+  function realizarMantenimiento(id) {
+    const mant = estado.mantenimientos.find(m => m.id === id);
+    if (mant) {
+      mant.ultimoKm = estado.kmActual;
+      guardarEstado();
+    }
+  }
+
   function renderizar() {
-    // Actualizar texto
     document.getElementById('galones-txt').innerText = estado.galonesActuales.toFixed(1);
     document.getElementById('capacidad-txt').innerText = CONFIG.capacidadTanque.toFixed(1);
     document.getElementById('km-txt').innerText = estado.kmActual.toLocaleString('es-CO');
 
-    // Calcular cuántos de los 6 segmentos deben encenderse
     const porcentaje = estado.galonesActuales / CONFIG.capacidadTanque;
     const segmentosActivos = Math.ceil(porcentaje * 6);
 
@@ -323,9 +499,58 @@
         seg.classList.remove('active');
       }
     }
+
+    const historialUl = document.getElementById('historial-ul');
+    historialUl.innerHTML = '';
+    if (estado.historial.length === 0) {
+      historialUl.innerHTML = '<li style="color:var(--subtext-color); font-size:0.8rem; text-align:center; padding:10px;">Sin registros de tanqueo.</li>';
+    } else {
+      estado.historial.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'history-item';
+        li.innerHTML = `
+          <div>
+            <div><strong>${item.km.toLocaleString('es-CO')} Km</strong></div>
+            <div class="date">${item.fecha}</div>
+          </div>
+          <div class="qty">+${item.galones.toFixed(1)} Gal</div>
+        `;
+        historialUl.appendChild(li);
+      });
+    }
+
+    const mantContainer = document.getElementById('lista-mantenimientos');
+    mantContainer.innerHTML = '';
+
+    estado.mantenimientos.forEach(m => {
+      const kmTranscurridos = estado.kmActual - m.ultimoKm;
+      const kmRestantes = m.intervalo - kmTranscurridos;
+      const requiereAtencion = kmRestantes <= 0;
+
+      const card = document.createElement('div');
+      card.className = `maint-card ${requiereAtencion ? 'due' : ''}`;
+      card.innerHTML = `
+        <div class="maint-header">
+          <div class="maint-title">
+            ${requiereAtencion ? '<span class="engine-icon" title="Check Engine"></span>' : ''}
+            ${m.nombre}
+          </div>
+          <span class="maint-status ${requiereAtencion ? 'status-alert' : 'status-ok'}">
+            ${requiereAtencion ? 'REVISIÓN' : 'OK'}
+          </span>
+        </div>
+        <div class="maint-body">
+          <span>Último: ${m.ultimoKm.toLocaleString('es-CO')} Km</span>
+          <span>${requiereAtencion ? '¡Vencido por ' + Math.abs(kmRestantes) + ' Km!' : 'Faltan: ' + kmRestantes + ' Km'}</span>
+        </div>
+        <button class="maint-action" onclick="realizarMantenimiento('${m.id}')">
+          Marcar Realizado Hoy (${estado.kmActual} Km)
+        </button>
+      `;
+      mantContainer.appendChild(card);
+    });
   }
 
-  // Renderizar al abrir la página
   renderizar();
 </script>
 
