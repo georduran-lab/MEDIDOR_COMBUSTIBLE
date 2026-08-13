@@ -807,7 +807,7 @@
 
                 kmRecorridosSesion += dist;
 
-                estado.kmActual += parseFloat((estado.kmActual + dist).toFixed(1));
+                estado.kmActual = parseFloat((estado.kmActual + dist).toFixed(1));
 
                 
 
@@ -903,7 +903,61 @@
 
       guardarEstado();
     }
-  
+
+    let intSimulacion = null;
+
+    function simularRecorrido20Km() {
+      // 1. Activar switch en interfaz
+      const switchConduccion = document.getElementById('toggle-conduccion');
+      if (switchConduccion && !switchConduccion.checked) {
+        switchConduccion.checked = true;
+        const panel = document.getElementById('panel-conduccion');
+        if (panel) panel.style.display = "block";
+      }
+
+      // 2. Desconectar GPS real si estaba activo para evitar interferencias
+      if (gpsWatchId !== null) {
+        navigator.geolocation.clearWatch(gpsWatchId);
+        gpsWatchId = null;
+      }
+
+      // 3. Forzar reinicio de datos en memoria local a 39.423 Km
+      estado.kmActual = 39423.0;
+      guardarEstado();
+
+      const kmPorSegundo = 20 / 60; // Avanza ~0.33 km por segundo
+      let distSimuladaSesion = 0;
+      let pasos = 0;
+
+      if (intSimulacion) clearInterval(intSimulacion);
+
+      intSimulacion = setInterval(() => {
+        pasos++;
+        distSimuladaSesion += kmPorSegundo;
+
+        // Actualiza datos visibles
+        const velEl = document.getElementById('vel-txt');
+        if (velEl) velEl.innerText = "5 km/h";
+
+        // Suma controlada de a 0.33 Km
+        estado.kmActual = parseFloat((estado.kmActual + kmPorSegundo).toFixed(1));
+
+        // Consumo proporcional de gasolina
+        const galonesConsumidos = kmPorSegundo / CONFIG.kmPorGalon;
+        estado.galonesActuales = Math.max(0, estado.galonesActuales - galonesConsumidos);
+
+        guardarEstado();
+
+        const kmSesionEl = document.getElementById('km-sesion-txt');
+        if (kmSesionEl) kmSesionEl.innerText = `${distSimuladaSesion.toFixed(1)} km`;
+
+        // Finalizar al completar los 60 segundos (20 km)
+        if (pasos >= 60) {
+          clearInterval(intSimulacion);
+          alert("¡Simulación completada! Se sumaron 20.0 Km exitosamente.");
+        }
+      }, 1000);
+    }
 </script>
 
 </body>
