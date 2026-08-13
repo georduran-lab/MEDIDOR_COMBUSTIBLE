@@ -332,12 +332,51 @@
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
+
+    /* Switch estilo iOS */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 46px;
+      height: 26px;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #3a3a3c; transition: .3s; border-radius: 34px;
+    }
+    .slider:before {
+      position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px;
+      background-color: white; transition: .3s; border-radius: 50%;
+    }
+    input:checked + .slider { background-color: #34c759; }
+    input:checked + .slider:before { transform: translateX(20px); }
   </style>
 </head>
 <body>
 
 <div class="container">
   <h2>Control de Combustible</h2>
+
+  <!-- Interruptor Modo Conducción -->
+  <div style="display: flex; justify-content: space-between; align-items: center; background: #2c2c2e; padding: 12px 16px; border-radius: 12px; margin-bottom: 16px;">
+    <span style="font-weight: 600; font-size: 0.9rem; color: #fff;">🏍️ Modo Conducción GPS</span>
+    <label class="switch">
+      <input type="checkbox" id="toggle-conduccion" onchange="toggleModoConduccion(this)">
+      <span class="slider round"></span>
+    </label>
+  </div>
+  
+  <!-- Panel en vivo cuando el modo está ACTIVO -->
+  <div id="panel-conduccion" style="display: none; background: #000; border: 1px solid #333; border-radius: 14px; padding: 16px; margin-bottom: 20px; text-align: center;">
+    <div style="font-size: 0.75rem; color: #8e8e93; text-transform: uppercase; letter-spacing: 1px;">Recorrido Sesión Actual</div>
+    <div style="font-size: 2.2rem; font-weight: 800; color: #34c759; margin: 4px 0;" id="km-sesion-txt">0.00 km</div>
+    
+    <div style="display: flex; justify-content: space-around; margin-top: 10px; font-size: 0.8rem; color: #a1a1a6;">
+      <div>Velocidad: <b id="vel-txt" style="color:#fff;">0 km/h</b></div>
+      <div>Inclinación: <b id="inc-txt" style="color:#fff;">0°</b></div>
+    </div>
+  </div>
 
   <!-- Medidor Oscuro Estilo Captura -->
   <div class="gauge-card">
@@ -566,6 +605,100 @@
   }
 
   renderizar();
+
+  let gpsWatchId = null;
+  let ultimaPosicion = null;
+  let kmRecorridosSesion = 0;
+  
+  // Calcular distancia entre dos coordenadas GPS (Fórmula de Haversine)
+  function calcularDistanciaKm(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Radio de la Tierra en km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+              Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+  }
+  
+  function toggleModoConduccion(element) {
+    const panel = document.getElementById('panel-conduccion');
+    
+    if (element.checked) {
+      // 1. Activar GPS
+      if ("geolocation" in navigator) {
+        panel.style.display = "block";
+        kmRecorridosSesion = 0;
+        ultimaPosicion = null;
+        document.getElementById('km-sesion-txt').innerText = "0.00 km";
+  
+        gpsWatchId = navigator.geolocation.watchPosition(
+          (pos) => {
+            const lat = pos.coords.latitude;
+            const lon = pos.coords.longitude;
+            const velocidadMps = pos.coords.speed || 0; // m/s
+            const velocidadKmh = Math.round(velocidadMps * 3.6);
+            
+            document.getElementById('vel-txt').innerText = `${velocidadKmh} km/h`;
+  
+            if (ultimaPosicion) {
+              const dist = calcularDistanciaKm(ultimaPosicion.lat, ultimaPosicion.lon, lat, lon);
+              // Filtrar pequeño ruido del GPS cuando estás detenido
+              if (dist > 0.005) { 
+                kmRecorridosSesion += dist;
+                estado.kmActual += dist;
+                
+                // Descontar combustible proporcionalmente
+                const galonesConsumidos = dist / CONFIG.kmPorGalon;
+                estado.galonesActuales = Math.max(0, estado.galonesActuales - galonesConsumidos);
+                
+                guardarEstado();
+                document.getElementById('km-sesion-txt').innerText = `${kmRecorridosSesion.toFixed(2)} km`;
+              }
+            }
+            ultimaPosicion = { lat, lon };
+          },
+          (err) => alert("Error al acceder al GPS. Asegúrate de dar permisos de ubicación."),
+          { enableHighAccuracy: true, maximumAge: 1000, timeout: 5000 }
+        );
+      } else {
+        alert("Tu navegador no soporta GPS.");
+        element.checked = false;
+      }
+  
+      // 2. Activar Acelerómetro para inclinación en curvas
+      activarAcelerometro();
+  
+    } else {
+      // Apagar modo conducción
+      panel.style.display = "none";
+      if (gpsWatchId !== null) {
+        navigator.geolocation.clearWatch(gpsWatchId);
+        gpsWatchId = null;
+      }
+      window.removeEventListener('devicemotion', manejarInclinacion);
+      alert(`Modo Conducción finalizado. Recorriste ${kmRecorridosSesion.toFixed(2)} km.`);
+    }
+  }
+  
+  function activarAcelerometro() {
+    if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+      DeviceMotionEvent.requestPermission().then(res => {
+        if (res === 'granted') window.addEventListener('devicemotion', manejarInclinacion);
+      });
+    } else {
+      window.addEventListener('devicemotion', manejarInclinacion);
+    }
+  }
+  
+  function manejarInclinacion(event) {
+    const x = event.accelerationIncludingGravity.x || 0;
+    const y = event.accelerationIncludingGravity.y || 0;
+    // Grados de inclinación lateral
+    const angulo = Math.round(Math.atan2(x, y) * (180 / Math.PI));
+    document.getElementById('inc-txt').innerText = `${Math.abs(angulo)}°`;
+  }
 </script>
 
 </body>
