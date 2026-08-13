@@ -649,7 +649,7 @@
               // Filtrar pequeño ruido del GPS cuando estás detenido
               if (dist > 0.005) { 
                 kmRecorridosSesion += dist;
-                estado.kmActual += dist;
+                estado.kmActual += parseFloat((estado.kmActual + dist).toFixed(1));
                 
                 // Descontar combustible proporcionalmente
                 const galonesConsumidos = dist / CONFIG.kmPorGalon;
