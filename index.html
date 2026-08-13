@@ -530,126 +530,75 @@
 
 
   function actualizarKm() {
-  const nuevoKmVal = document.getElementById('input-km').value;
-  const nuevoKm = parseFloat(nuevoKmVal);
-
-  // Permitimos ingresar un kilometraje menor para corregir el dato guardado
-  if (nuevoKmVal === "" || isNaN(nuevoKm)) {
-    alert("Ingresa un kilometraje válido.");
-    return;
-  }
-
-  const kmRecorridos = nuevoKm - estado.kmActual;
-
-  // Solo descontamos combustible si se trata de un avance real
-  if (kmRecorridos > 0) {
+    const nuevoKmVal = document.getElementById('input-km').value;
+    const nuevoKm = parseFloat(nuevoKmVal);
+  
+    if (nuevoKmVal === "" || isNaN(nuevoKm) || nuevoKm < estado.kmActual) {
+      alert("Ingresa un kilometraje válido (mayor o igual al actual).");
+      return;
+    }
+  
+    const kmRecorridos = nuevoKm - estado.kmActual;
     const galonesConsumidos = kmRecorridos / CONFIG.kmPorGalon;
+  
     estado.galonesActuales = Math.max(0, estado.galonesActuales - galonesConsumidos);
+    estado.kmActual = nuevoKm;
+  
+    document.getElementById('input-km').value = '';
+    guardarEstado();
   }
-
-  estado.kmActual = nuevoKm;
-
-  document.getElementById('input-km').value = '';
-  guardarEstado();
-}
 
 
   function agregarCombustible() {
-
     const galonesNuevosVal = document.getElementById('input-galones').value;
-
     const galonesNuevos = parseFloat(galonesNuevosVal);
 
-
-
     if (galonesNuevosVal === "" || isNaN(galonesNuevos) || galonesNuevos <= 0) {
-
       alert("Ingresa una cantidad válida de galones.");
-
       return;
-
     }
-
-
 
     estado.galonesActuales = Math.min(CONFIG.capacidadTanque, estado.galonesActuales + galonesNuevos);
 
-
-
     const ahora = new Date();
-
     const fechaHora = ahora.toLocaleDateString('es-CO', {
-
       day: '2-digit', month: '2-digit', year: '2-digit'
-
     }) + " " + ahora.toLocaleTimeString('es-CO', {
-
       hour: '2-digit', minute: '2-digit', hour12: true
 
     });
 
-
-
     estado.historial.unshift({
-
       fecha: fechaHora,
-
       galones: galonesNuevos,
-
       km: estado.kmActual
-
     });
 
-
-
     document.getElementById('input-galones').value = '';
-
     guardarEstado();
-
   }
-
 
 
   function realizarMantenimiento(id) {
-
     const mant = estado.mantenimientos.find(m => m.id === id);
-
     if (mant) {
-
       mant.ultimoKm = estado.kmActual;
-
       guardarEstado();
-
     }
-
   }
 
-
-
   function renderizar() {
-
     document.getElementById('galones-txt').innerText = estado.galonesActuales.toFixed(1);
-
     document.getElementById('capacidad-txt').innerText = CONFIG.capacidadTanque.toFixed(1);
-
     document.getElementById('km-txt').innerText = estado.kmActual.toLocaleString('es-CO');
 
-
-
     const porcentaje = estado.galonesActuales / CONFIG.capacidadTanque;
-
     const segmentosActivos = Math.ceil(porcentaje * 6);
 
-
-
     for (let i = 1; i <= 6; i++) {
-
       const seg = document.getElementById(`seg-${i}`);
-
       if (i <= segmentosActivos) {
-
         seg.classList.add('active');
-
       } else {
 
         seg.classList.remove('active');
@@ -875,81 +824,45 @@
           (err) => alert("Error al acceder al GPS. Asegúrate de dar permisos de ubicación."),
 
           { enableHighAccuracy: true, maximumAge: 1000, timeout: 5000 }
-
         );
-
       } else {
-
         alert("Tu navegador no soporta GPS.");
-
         element.checked = false;
-
       }
-
-  
-
       // 2. Activar Acelerómetro para inclinación en curvas
 
       activarAcelerometro();
-
-  
-
     } else {
-
       // Apagar modo conducción
-
       panel.style.display = "none";
-
       if (gpsWatchId !== null) {
-
         navigator.geolocation.clearWatch(gpsWatchId);
-
         gpsWatchId = null;
-
       }
-
       window.removeEventListener('devicemotion', manejarInclinacion);
-
       alert(`Modo Conducción finalizado. Recorriste ${kmRecorridosSesion.toFixed(2)} km.`);
-
     }
-
-  }
-
-  
+  }  
 
   function activarAcelerometro() {
 
     if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
-
       DeviceMotionEvent.requestPermission().then(res => {
-
         if (res === 'granted') window.addEventListener('devicemotion', manejarInclinacion);
-
       });
-
     } else {
-
       window.addEventListener('devicemotion', manejarInclinacion);
-
     }
-
   }
-
   
 
   function manejarInclinacion(event) {
-
     const x = event.accelerationIncludingGravity.x || 0;
-
     const y = event.accelerationIncludingGravity.y || 0;
 
     // Grados de inclinación lateral
-
     const angulo = Math.round(Math.atan2(x, y) * (180 / Math.PI));
-
     document.getElementById('inc-txt').innerText = `${Math.abs(angulo)}°`;
-
   }
 </script>
 
