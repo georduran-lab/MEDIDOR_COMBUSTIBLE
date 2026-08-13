@@ -530,41 +530,28 @@
 
 
   function actualizarKm() {
+  const nuevoKmVal = document.getElementById('input-km').value;
+  const nuevoKm = parseFloat(nuevoKmVal);
 
-    const nuevoKmVal = document.getElementById('input-km').value;
-
-    const nuevoKm = parseFloat(nuevoKmVal);
-
-
-
-    if (nuevoKmVal === "" || isNaN(nuevoKm) || nuevoKm < estado.kmActual) {
-
-      alert("Ingresa un kilometraje válido (mayor o igual al actual).");
-
-      return;
-
-    }
-
-
-
-    const kmRecorridos = nuevoKm - estado.kmActual;
-
-    const galonesConsumidos = kmRecorridos / CONFIG.kmPorGalon;
-
-
-
-    estado.galonesActuales = Math.max(0, estado.galonesActuales - galonesConsumidos);
-
-    estado.kmActual = nuevoKm;
-
-
-
-    document.getElementById('input-km').value = '';
-
-    guardarEstado();
-
+  // Permitimos ingresar un kilometraje menor para corregir el dato guardado
+  if (nuevoKmVal === "" || isNaN(nuevoKm)) {
+    alert("Ingresa un kilometraje válido.");
+    return;
   }
 
+  const kmRecorridos = nuevoKm - estado.kmActual;
+
+  // Solo descontamos combustible si se trata de un avance real
+  if (kmRecorridos > 0) {
+    const galonesConsumidos = kmRecorridos / CONFIG.kmPorGalon;
+    estado.galonesActuales = Math.max(0, estado.galonesActuales - galonesConsumidos);
+  }
+
+  estado.kmActual = nuevoKm;
+
+  document.getElementById('input-km').value = '';
+  guardarEstado();
+}
 
 
   function agregarCombustible() {
