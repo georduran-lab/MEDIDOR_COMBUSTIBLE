@@ -432,6 +432,16 @@
     <!-- Pestaña 3: Mantenimientos -->
     <div id="tab-mantenimiento" class="tab-pane">
       <div id="lista-mantenimientos"></div>
+      <div class="maint-card" style="margin-bottom: 15px; border-color: var(--accent-color, #4CAF50);">
+        <h4 style="margin: 0 0 10px 0; font-size: 0.9rem; color: #fff;">+ Agregar Nuevo Mantenimiento</h4>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <input type="text" id="input-maint-nombre" placeholder="Pieza / Mantenimiento (ej. Guaya Clutch)" style="padding: 8px; border-radius: 6px; border: 1px solid #333; background: #222; color: #fff;">
+          <input type="number" id="input-maint-intervalo" placeholder="Intervalo en Km (ej. 3000)" style="padding: 8px; border-radius: 6px; border: 1px solid #333; background: #222; color: #fff;">
+          <button onclick="agregarNuevoMantenimiento()" style="padding: 8px; background: #4CAF50; border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer;">
+            Guardar Mantenimiento
+          </button>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -864,6 +874,36 @@
     const angulo = Math.round(Math.atan2(x, y) * (180 / Math.PI));
     document.getElementById('inc-txt').innerText = `${Math.abs(angulo)}°`;
   }
+
+  function agregarNuevoMantenimiento() {
+      const nombreInput = document.getElementById('input-maint-nombre').value.trim();
+      const intervaloVal = document.getElementById('input-maint-intervalo').value;
+      const intervalo = parseFloat(intervaloVal);
+
+      if (!nombreInput || isNaN(intervalo) || intervalo <= 0) {
+        alert("Por favor ingresa un nombre válido y un intervalo de kilómetros mayor a 0.");
+        return;
+      }
+
+      // Genera un ID único para la nueva pieza
+      const nuevoId = 'maint_' + Date.now();
+
+      const nuevoMantenimiento = {
+        id: nuevoId,
+        nombre: nombreInput,
+        intervalo: intervalo,
+        ultimoKm: estado.kmActual // Inicia desde el kilometraje actual
+      };
+
+      estado.mantenimientos.push(nuevoMantenimiento);
+
+      // Limpia los campos de entrada
+      document.getElementById('input-maint-nombre').value = '';
+      document.getElementById('input-maint-intervalo').value = '';
+
+      guardarEstado();
+    }
+  
 </script>
 
 </body>
