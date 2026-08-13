@@ -413,7 +413,16 @@
     mantenimientos: MANTENIMIENTOS_DEFAULT
   };
 
-  if (!estado.mantenimientos) estado.mantenimientos = MANTENIMIENTOS_DEFAULT;
+  // Reemplaza esta sección en tu JavaScript:
+  if (estado.mantenimientos) {
+    estado.mantenimientos = MANTENIMIENTOS_DEFAULT.map(mDef => {
+      const prev = estado.mantenimientos.find(m => m.id === mDef.id);
+      return {
+        ...mDef,
+        ultimoKm: prev ? prev.ultimoKm : 0
+      };
+    });
+  }
 
   function guardarEstado() {
     localStorage.setItem('estado_moto_se150', JSON.stringify(estado));
