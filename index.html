@@ -539,78 +539,20 @@
   }
 
   function renderizar() {
-      document.getElementById('galones-txt').innerText = estado.galonesActuales.toFixed(1);
-      document.getElementById('capacidad-txt').innerText = CONFIG.capacidadTanque.toFixed(1);
-      
-      // Muestra el kilometraje general formateado con 1 decimal
-      document.getElementById('km-txt').innerText = estado.kmActual.toLocaleString('es-CO', {
-        minimumFractionDigits: 1,
-        maximumFractionDigits: 1
-      });
-    
-      const porcentaje = estado.galonesActuales / CONFIG.capacidadTanque;
-      const segmentosActivos = Math.ceil(porcentaje * 6);
-    
-      for (let i = 1; i <= 6; i++) {
-        const seg = document.getElementById(`seg-${i}`);
-        if (i <= segmentosActivos) {
-          seg.classList.add('active');
-        } else {
-          seg.classList.remove('active');
-        }
-      }
-    
-      // Renderizado del historial de tanqueo
-      const historialUl = document.getElementById('historial-ul');
-      historialUl.innerHTML = '';
-      if (estado.historial.length === 0) {
-        historialUl.innerHTML = '<li style="color:var(--subtext-color); font-size:0.8rem; text-align:center; padding:10px;">Sin registros de tanqueo.</li>';
+    document.getElementById('galones-txt').innerText = estado.galonesActuales.toFixed(1);
+    document.getElementById('capacidad-txt').innerText = CONFIG.capacidadTanque.toFixed(1);
+    document.getElementById('km-txt').innerText = estado.kmActual.toLocaleString('es-CO');
+
+    const porcentaje = estado.galonesActuales / CONFIG.capacidadTanque;
+    const segmentosActivos = Math.ceil(porcentaje * 6);
+
+    for (let i = 1; i <= 6; i++) {
+      const seg = document.getElementById(`seg-${i}`);
+      if (i <= segmentosActivos) {
+        seg.classList.add('active');
       } else {
-        estado.historial.forEach(item => {
-          const li = document.createElement('li');
-          li.className = 'history-item';
-          li.innerHTML = `
-            <div>
-              <div><strong>${item.km.toFixed(1)} Km</strong></div>
-              <div class="date">${item.fecha}</div>
-            </div>
-            <div class="qty">+${item.galones.toFixed(1)} Gal</div>
-          `;
-          historialUl.appendChild(li);
-        });
+        seg.classList.remove('active');
       }
-    
-      // Renderizado de mantenimientos limitando a 1 decimal (.toFixed(1))
-      const mantContainer = document.getElementById('lista-mantenimientos');
-      mantContainer.innerHTML = '';
-    
-      estado.mantenimientos.forEach(m => {
-        const kmTranscurridos = estado.kmActual - m.ultimoKm;
-        const kmRestantes = m.intervalo - kmTranscurridos;
-        const requiereAtencion = kmRestantes <= 0;
-    
-        const card = document.createElement('div');
-        card.className = `maint-card ${requiereAtencion ? 'due' : ''}`;
-        card.innerHTML = `
-          <div class="maint-header">
-            <div class="maint-title">
-              ${requiereAtencion ? '<span class="engine-icon" title="Check Engine"></span>' : ''}
-              ${m.nombre}
-            </div>
-            <span class="maint-status ${requiereAtencion ? 'status-alert' : 'status-ok'}">
-              ${requiereAtencion ? 'REVISIÓN' : 'OK'}
-            </span>
-          </div>
-          <div class="maint-body">
-            <span>Último: ${m.ultimoKm.toFixed(1)} Km</span>
-            <span>${requiereAtencion ? '¡Vencido por ' + Math.abs(kmRestantes).toFixed(1) + ' Km!' : 'Faltan: ' + kmRestantes.toFixed(1) + ' Km'}</span>
-          </div>
-          <button class="maint-action" onclick="realizarMantenimiento('${m.id}')">
-            Marcar Realizado Hoy (${estado.kmActual.toFixed(1)} Km)
-          </button>
-        `;
-        mantContainer.appendChild(card);
-      });
     }
 
     const historialUl = document.getElementById('historial-ul');
