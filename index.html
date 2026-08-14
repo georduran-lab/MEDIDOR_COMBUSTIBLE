@@ -13,15 +13,6 @@
   
   <!-- Icono optimizado para pantalla de inicio de iPhone / iOS -->
   <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231e1e1e'/><g transform='scale(3) translate(4, 4)'><path fill='%23ffcc00' d='M19.77 7.23l.01-.01-3.72-3.72L15 4.56l2.11 2.11c-.94.36-1.61 1.26-1.61 2.33 0 1.38 1.12 2.5 2.5 2.5.36 0 .69-.08 1-.22v5.72c0 .55-.45 1-1 1s-1-.45-1-1V14c0-1.1-.9-2-2-2h-1V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-3h1c.55 0 1 .45 1 1v2.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V10.5c0-1.33-.53-2.53-1.23-3.27zM11 10H5V5h6v5z'/></g></svg>">
-
-  <!-- Configuración PWA para iOS (Apple) -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Control SE150">
-
-  <!-- Ícono personalizado para la pantalla de inicio del iPhone -->
-  <link rel="apple-touch-icon" href="icono.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
   <style>
     :root {
       --bg-color: #121212;
@@ -153,8 +144,9 @@
       display: flex;
       background-color: #2c2c2e;
       border-radius: 10px;
-      padding: 3px;
+      padding: 5px;
       margin-bottom: 18px;
+      margin-top: 5px;
       flex-shrink: 0;
     }
 
@@ -405,6 +397,25 @@
     </div>
     <div class="stats">
       <p style="margin:0;">Tanque: <span id="galones-txt">0.5</span> / <span id="capacidad-txt">2.3</span> Gal | Km: <span id="km-txt">39.355</span></p>
+    </div>
+  </div>
+
+    <!-- Bloque Autonomía Estimada (Estilo Recorrido Sesión Actual) -->
+    <!-- Tarjeta Autonomía Estimada -->
+  <div class="card-sesion" style="background: #000000; border-radius: 14px; padding: 18px 15px; margin-bottom: 15px; text-align: center; border: 1px solid #1a1a1a;">
+    <!-- Título Superior -->
+    <div style="font-size: 0.8rem; color: #aaa; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;">
+      AUTONOMÍA ESTIMADA
+    </div>
+
+    <!-- Valor Principal (Verde Neón) -->
+    <div id="autonomia-txt" style="font-size: 2.2rem; font-weight: bold; color: #00ff66; margin: 6px 0 12px 0;">
+      -- km
+    </div>
+
+    <!-- Sub-info (Gris + Blanco en Negrita) -->
+    <div style="font-size: 0.85rem; color: #aaa;">
+      Distancia recorrida: <span id="distancia-recorrida-txt" style="color: #ffffff; font-weight: bold;">0.00 km</span>
     </div>
   </div>
 
@@ -731,10 +742,42 @@
 
     });
 
-  }
+    // 1. AQUÍ SOLO LLAMAS A LA FUNCIÓN (con paréntesis):
+    actualizarAutonomia();
 
+    }
 
+    function actualizarAutonomia() {
+      const elAutonomia = document.getElementById('autonomia-txt');
+      const elDistancia = document.getElementById('distancia-recorrida-txt');
 
+      if (elAutonomia) {
+        const kmRestantes = estado.galonesActuales * CONFIG.kmPorGalon;
+        elAutonomia.innerText = `${kmRestantes.toFixed(1)} km`;
+
+        // Lógica de colores según nivel de reserva
+        if (kmRestantes <= 25) {
+          elAutonomia.style.color = "#ff3333";
+        } else if (kmRestantes <= 50) {
+          elAutonomia.style.color = "#ffbb33";
+        } else {
+          elAutonomia.style.color = "#00ff66";
+        }
+      }
+
+      // Actualizar la distancia recorrida en la sub-línea
+      if (typeof distanciaSesion !== 'undefined') {
+          distancia = distanciaSesion;
+        } else {
+          const elKmSesion = document.getElementById('km-sesion-txt');
+          if (elKmSesion) {
+            distancia = parseFloat(elKmSesion.innerText) || 0;
+          }
+        }
+
+        elDistancia.innerText = `${distancia.toFixed(2)} km`;
+      }
+    
   renderizar();
 
 
@@ -972,19 +1015,6 @@
         }
       }, 1000);
     }
-
-    let wakeLock = null;
-
-    async function solicitarPantallaEncendida() {
-      try {
-        if ('wakeLock' in navigator) {
-          wakeLock = await navigator.wakeLock.request('screen');
-        }
-      } catch (err) {
-        console.log("No se pudo mantener la pantalla encendida:", err);
-      }
-    }
-  
 </script>
 
 </body>
