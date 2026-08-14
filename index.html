@@ -6,129 +6,111 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Control de Combustible</title>
-   <!-- FAVICON SVG INTEGRADO -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffcc00'><path d='M19.77 7.23l.01-.01-3.72-3.72L15 4.56l2.11 2.11c-.94.36-1.61 1.26-1.61 2.33 0 1.38 1.12 2.5 2.5 2.5.36 0 .69-.08 1-.22v5.72c0 .55-.45 1-1 1s-1-.45-1-1V14c0-1.1-.9-2-2-2h-1V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-3h1c.55 0 1 .45 1 1v2.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V10.5c0-1.33-.53-2.53-1.23-3.27zM11 10H5V5h6v5z'/></svg>">
-  <!-- Icono para navegador web (Chrome, Edge, Android) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffcc00'><path d='M19.77 7.23l.01-.01-3.72-3.72L15 4.56l2.11 2.11c-.94.36-1.61 1.26-1.61 2.33 0 1.38 1.12 2.5 2.5 2.5.36 0 .69-.08 1-.22v5.72c0 .55-.45 1-1 1s-1-.45-1-1V14c0-1.1-.9-2-2-2h-1V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-3h1c.55 0 1 .45 1 1v2.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V10.5c0-1.33-.53-2.53-1.23-3.27zM11 10H5V5h6v5z'/></svg>">
   
-  <!-- Icono optimizado para pantalla de inicio de iPhone / iOS -->
-  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231e1e1e'/><g transform='scale(3) translate(4, 4)'><path fill='%23ffcc00' d='M19.77 7.23l.01-.01-3.72-3.72L15 4.56l2.11 2.11c-.94.36-1.61 1.26-1.61 2.33 0 1.38 1.12 2.5 2.5 2.5.36 0 .69-.08 1-.22v5.72c0 .55-.45 1-1 1s-1-.45-1-1V14c0-1.1-.9-2-2-2h-1V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-3h1c.55 0 1 .45 1 1v2.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V10.5c0-1.33-.53-2.53-1.23-3.27zM11 10H5V5h6v5z'/></g></svg>">
+  <!-- FAVICON SVG INTEGRADO -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffcc00'><path d='M19.77 7.23l.01-.01-3.72-3.72L15 4.56l2.11 2.11c-.94.36-1.61 1.26-1.61 2.33 0 1.38 1.12 2.5 2.5 2.5.36 0 .69-.08 1-.22v5.72c0 .55-.45 1-1 1s-1-.45-1-1V14c0-1.1-.9-2-2-2h-1V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-3h1c.55 0 1 .45 1 1v2.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V10.5c0-1.33-.53-2.53-1.23-3.27zM11 10H5V5h6v5z'/></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231e1e1e'/><g transform='scale(3) translate(4, 4)'><path fill='%23ffcc00' d='M19.77 7.23l.01-.01-3.72-3.72L15 4.56l2.11 2.11c-.94.36-1.61 1.26-1.61 2.33 0 1.38 1.12 2.5 2.5 2.5.36 0 .69-.08 1-.22v5.72c0 .55-.45 1-1 1s-1-.45-1-1V14c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-3h1c.55 0 1 .45 1 1v2.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V10.5c0-1.33-.53-2.53-1.23-3.27zM11 10H5V5h6v5z'/></g></svg>">
+  
   <style>
-    :root {
-      --bg-color: #121212;
-      --card-bg: #1e1e1e;
-      --gauge-bg: #000000;
-      --accent-red: #ff3b30;
-      --accent-white: #ffffff;
-      --accent-green: #34c759;
-      --accent-blue: #0a84ff;
-      --inactive-color: #3a3a3c;
-      --text-color: #ffffff;
-      --subtext-color: #a1a1a6;
-      --shadow-color: rgba(0,0,0,0.6);
-    }
-
     * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
+      margin: 0;
+      padding: 0;
     }
 
     html, body {
       width: 100%;
       height: 100%;
-      height: 100dvh;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      touch-action: manipulation;
+      background-color: #121212;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 16px;
+      display: table;
+    }
+
+    .wrapper-centrado {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      padding: 12px;
     }
 
     .container {
-      background-color: var(--card-bg);
+      background-color: #1e1e1e;
       border-radius: 20px;
-      padding: 24px 20px;
+      padding: 20px 16px;
       width: 100%;
       max-width: 380px;
-      box-shadow: 0 10px 30px var(--shadow-color);
-      max-height: 95dvh;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
+      margin: 0 auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      text-align: left;
     }
 
     h2 { 
       text-align: center; 
       margin-top: 0; 
       font-weight: 700; 
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       font-size: 1.35rem;
-      color: var(--text-color);
-      flex-shrink: 0;
+      color: #ffffff;
     }
 
     /* Medidor Gráfico Flotante Oscuro */
     .gauge-card {
-      background-color: var(--gauge-bg);
+      background-color: #000000;
       border-radius: 14px;
       padding: 18px 14px 14px 14px;
-      margin-bottom: 20px;
-      flex-shrink: 0;
+      margin-bottom: 16px;
+      border: 1px solid #222225;
     }
 
     .gauge-horiz-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: table;
       width: 100%;
       margin-bottom: 12px;
-      gap: 8px;
     }
 
     .gauge-label {
+      display: table-cell;
       font-weight: 800;
       font-style: italic;
       font-size: 1.3rem;
-      user-select: none;
-      flex-shrink: 0;
+      vertical-align: middle;
+      width: 25px;
     }
 
-    .label-e { color: var(--accent-red); }
-    .label-f { color: var(--text-color); }
+    .label-e { color: #ff3b30; text-align: left; }
+    .label-f { color: #ffffff; text-align: right; }
 
     .bars-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 6px;
-      flex-grow: 1;
-      width: 100%;
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
     }
 
     .segment {
-      flex: 1;
+      display: inline-block;
+      width: 13%;
       height: 12px;
-      background-color: var(--inactive-color);
+      background-color: #2a2a2d;
       border-radius: 4px;
-      transition: background-color 0.2s ease, box-shadow 0.2s ease;
+      margin: 0 1px;
+      vertical-align: middle;
     }
 
+    /* Colores de segmentos */
     .segment.active.reserve { 
-      background-color: var(--accent-red); 
-      box-shadow: 0 0 8px var(--accent-red); 
+      background-color: #ff3b30; 
+      box-shadow: 0 0 6px #ff3b30; 
     }
     .segment.active.normal { 
-      background-color: var(--accent-white); 
-      box-shadow: 0 0 8px var(--accent-white); 
+      background-color: #ffffff; 
+      box-shadow: 0 0 6px #ffffff; 
     }
 
     .stats {
@@ -136,69 +118,53 @@
       font-size: 0.78rem;
       color: #8e8e93;
       margin: 0;
-      letter-spacing: -0.2px;
     }
 
-    /* Pestañas estilo iOS */
+    /* Pestañas de 4 columnas */
     .tabs-header {
-      display: flex;
       background-color: #2c2c2e;
       border-radius: 10px;
-      padding: 5px;
-      margin-bottom: 18px;
-      margin-top: 5px;
-      flex-shrink: 0;
+      padding: 4px;
+      margin-bottom: 16px;
+      overflow: hidden;
     }
 
     .tab-btn {
-      flex: 1;
-      padding: 8px 2px;
+      float: left;
+      width: 25%;
+      padding: 8px 0;
       border: none;
       background: none;
-      color: var(--subtext-color);
-      font-size: 0.75rem;
+      color: #a1a1a6;
+      font-size: 0.68rem;
       font-weight: 600;
       border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.2s, color 0.2s;
       text-align: center;
     }
 
     .tab-btn.active {
       background-color: #3a3a3c;
-      color: var(--text-color);
-    }
-
-    /* Contenido de Pestañas */
-    .tabs-content {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
+      color: #ffffff;
     }
 
     .tab-pane {
       display: none;
-      height: 100%;
     }
 
     .tab-pane.active {
-      display: flex;
-      flex-direction: column;
+      display: block;
     }
 
-    /* Formulario */
-    .form-group {
-      margin-bottom: 16px;
-    }
-
+    /* Inputs y Botones */
     label { 
       display: block; 
       font-size: 0.82rem; 
       margin-bottom: 8px; 
-      color: var(--subtext-color); 
+      color: #a1a1a6; 
     }
 
-    input {
+    input[type="number"], input[type="text"] {
       width: 100%;
       padding: 12px 14px;
       border-radius: 10px;
@@ -207,42 +173,30 @@
       color: white;
       font-size: 15px;
       outline: none;
-      appearance: none;
-      -webkit-appearance: none;
-    }
-
-    input:focus {
-      border-color: var(--accent-blue);
-    }
-
-    input::placeholder {
-      color: #55555d;
+      margin-bottom: 8px;
     }
 
     .btn {
       width: 100%;
-      padding: 13px;
+      padding: 12px;
       border: none;
       border-radius: 10px;
-      background-color: var(--accent-blue);
+      background-color: #0a84ff;
       color: white;
-      font-weight: 600;
+      font-weight: bold;
       cursor: pointer;
-      margin-top: 8px;
       font-size: 0.95rem;
-      transition: opacity 0.2s;
     }
 
-    .btn:active { opacity: 0.85; }
-    .btn-secondary { background-color: var(--accent-green); }
+    .btn-green { background-color: #28a745; }
 
     /* Listas */
     .history-list {
       list-style: none;
       padding: 0;
       margin: 0;
+      max-height: 220px;
       overflow-y: auto;
-      flex-grow: 1;
     }
 
     .history-item {
@@ -250,20 +204,16 @@
       border-radius: 10px;
       padding: 10px 12px;
       margin-bottom: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       font-size: 0.82rem;
+      overflow: hidden;
     }
+
+    .history-item .left { float: left; }
+    .history-item .right { float: right; font-weight: bold; color: #34c759; }
 
     .history-item .date {
-      color: var(--subtext-color);
+      color: #a1a1a6;
       font-size: 0.75rem;
-    }
-
-    .history-item .qty {
-      font-weight: bold;
-      color: var(--accent-green);
     }
 
     .maint-card {
@@ -271,53 +221,40 @@
       border-radius: 10px;
       padding: 12px;
       margin-bottom: 10px;
-      border-left: 4px solid var(--accent-green);
+      border-left: 4px solid #34c759;
     }
 
     .maint-card.due {
-      border-left-color: var(--accent-red);
+      border-left-color: #ff3b30;
       background-color: #2c1a1a;
     }
 
     .maint-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      overflow: hidden;
       margin-bottom: 6px;
     }
 
     .maint-title {
+      float: left;
       font-weight: bold;
       font-size: 0.88rem;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .engine-icon {
-      display: inline-block;
-      width: 14px;
-      height: 14px;
-      background-color: var(--accent-red);
-      mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 4v2h3v2H7v2H5V8H3v8h2v-2h2v2h3v2H7v2h10v-2h-3v-2h3v-2h2v2h2V8h-2v2h-2V8h-3V6h3V4H7z"/></svg>') no-repeat center;
-      -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 4v2h3v2H7v2H5V8H3v8h2v-2h2v2h3v2H7v2h10v-2h-3v-2h3v-2h2v2h2V8h-2v2h-2V8h-3V6h3V4H7z"/></svg>') no-repeat center;
     }
 
     .maint-status {
+      float: right;
       font-size: 0.72rem;
       font-weight: bold;
       padding: 2px 6px;
       border-radius: 4px;
     }
 
-    .status-ok { background-color: rgba(52, 199, 89, 0.2); color: var(--accent-green); }
-    .status-alert { background-color: rgba(255, 59, 48, 0.2); color: var(--accent-red); }
+    .status-ok { background-color: rgba(52, 199, 89, 0.2); color: #34c759; }
+    .status-alert { background-color: rgba(255, 59, 48, 0.2); color: #ff3b30; }
 
     .maint-body {
       font-size: 0.76rem;
-      color: var(--subtext-color);
-      display: flex;
-      justify-content: space-between;
+      color: #a1a1a6;
+      overflow: hidden;
     }
 
     .maint-action {
@@ -325,270 +262,283 @@
       background-color: #3a3a3c;
       border: none;
       color: white;
-      padding: 6px 10px;
+      padding: 8px 10px;
       border-radius: 6px;
       font-size: 0.75rem;
       cursor: pointer;
       width: 100%;
     }
 
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
-
-    /* Switch estilo iOS */
+    /* Switch */
     .switch {
       position: relative;
       display: inline-block;
-      width: 46px;
-      height: 26px;
+      width: 44px;
+      height: 24px;
     }
     .switch input { opacity: 0; width: 0; height: 0; }
     .slider {
       position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #3a3a3c; transition: .3s; border-radius: 34px;
+      background-color: #3a3a3c; border-radius: 24px;
     }
     .slider:before {
-      position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px;
-      background-color: white; transition: .3s; border-radius: 50%;
+      position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
+      background-color: white; border-radius: 50%;
     }
     input:checked + .slider { background-color: #34c759; }
-    input:checked + .slider:before { transform: translateX(20px); }
+    input:checked + .slider:before { left: 23px; }
+
+    .collapsible-content {
+      display: none;
+      margin-top: 8px;
+    }
+
+    .collapsible-content.open {
+      display: block;
+    }
+
+    /* Toast */
+    .toast-notificacion {
+      position: fixed;
+      top: 15px;
+      left: 5%;
+      width: 90%;
+      background: #00ff66;
+      color: #000;
+      font-weight: bold;
+      font-size: 0.9rem;
+      padding: 12px 0;
+      text-align: center;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      display: none;
+    }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <h2>Control de Combustible</h2>
+<!-- Toast Banner -->
+<div id="toast-kilometraje" class="toast-notificacion">
+  ✓ Kilometraje Actualizado
+</div>
 
-  <!-- Interruptor Modo Conducción -->
-  <div style="display: flex; justify-content: space-between; align-items: center; background: #2c2c2e; padding: 12px 16px; border-radius: 12px; margin-bottom: 16px;">
-    <span style="font-weight: 600; font-size: 0.9rem; color: #fff;">🏍️ Modo Conducción GPS</span>
-    <label class="switch">
-      <input type="checkbox" id="toggle-conduccion" onchange="toggleModoConduccion(this)">
-      <span class="slider round"></span>
-    </label>
-  </div>
-  
-  <!-- Panel en vivo cuando el modo está ACTIVO -->
-  <div id="panel-conduccion" style="display: none; background: #000; border: 1px solid #333; border-radius: 14px; padding: 16px; margin-bottom: 20px; text-align: center;">
-    <div style="font-size: 0.75rem; color: #8e8e93; text-transform: uppercase; letter-spacing: 1px;">Recorrido Sesión Actual</div>
-    <div style="font-size: 2.2rem; font-weight: 800; color: #34c759; margin: 4px 0;" id="km-sesion-txt">0.00 km</div>
-    
-    <div style="display: flex; justify-content: space-around; margin-top: 10px; font-size: 0.8rem; color: #a1a1a6;">
-      <div>Velocidad: <b id="vel-txt" style="color:#fff;">0 km/h</b></div>
-      <div>Inclinación: <b id="inc-txt" style="color:#fff;">0°</b></div>
-    </div>
-  </div>
+<div class="wrapper-centrado">
+  <div class="container">
+    <h2>Control de Combustible</h2>
 
-  <!-- Medidor Oscuro Estilo Captura -->
-  <div class="gauge-card">
-    <div class="gauge-horiz-container">
-      <div class="gauge-label label-e">E</div>
-      <div class="bars-row">
-        <div class="segment reserve" id="seg-1"></div>
-        <div class="segment normal" id="seg-2"></div>
-        <div class="segment normal" id="seg-3"></div>
-        <div class="segment normal" id="seg-4"></div>
-        <div class="segment normal" id="seg-5"></div>
-        <div class="segment normal" id="seg-6"></div>
+    <!-- Interruptor Modo Conducción -->
+    <div style="background: #2c2c2e; padding: 10px 14px; border-radius: 12px; margin-bottom: 14px; overflow: hidden;">
+      <span style="float: left; font-weight: 600; font-size: 0.88rem; color: #fff; margin-top: 2px;">🏎️ Modo Conducción GPS</span>
+      <div style="float: right;">
+        <label class="switch">
+          <input type="checkbox" id="toggle-conduccion" onchange="toggleModoConduccion(this)">
+          <span class="slider"></span>
+        </label>
       </div>
-      <div class="gauge-label label-f">F</div>
     </div>
-    <div class="stats">
-      <p style="margin:0;">Tanque: <span id="galones-txt">0.5</span> / <span id="capacidad-txt">2.3</span> Gal | Km: <span id="km-txt">39.355</span></p>
+    
+    <!-- Panel GPS en vivo -->
+    <div id="panel-conduccion" style="display: none; background: #000; border: 1px solid #333; border-radius: 14px; padding: 14px; margin-bottom: 16px; text-align: center;">
+      <div style="font-size: 0.72rem; color: #8e8e93; text-transform: uppercase;">Recorrido Sesión Actual</div>
+      <div style="font-size: 2rem; font-weight: 800; color: #34c759; margin: 4px 0;" id="km-sesion-txt">0.00 km</div>
+      <div style="font-size: 0.8rem; color: #a1a1a6; margin-top: 6px;">
+        Velocidad: <b id="vel-txt" style="color:#fff;">0 km/h</b> | Inclinación: <b id="inc-txt" style="color:#fff;">0°</b>
+      </div>
     </div>
-  </div>
 
-    <!-- Bloque Autonomía Estimada (Estilo Recorrido Sesión Actual) -->
+    <!-- Medidor Gráfico -->
+    <div class="gauge-card">
+      <div class="gauge-horiz-container">
+        <div class="gauge-label label-e">E</div>
+        <div class="bars-row">
+          <div class="segment reserve" id="seg-1"></div>
+          <div class="segment normal" id="seg-2"></div>
+          <div class="segment normal" id="seg-3"></div>
+          <div class="segment normal" id="seg-4"></div>
+          <div class="segment normal" id="seg-5"></div>
+          <div class="segment normal" id="seg-6"></div>
+        </div>
+        <div class="gauge-label label-f">F</div>
+      </div>
+      <div class="stats">
+        <p style="margin:0;">Tanque: <span id="galones-txt">0.5</span> / <span id="capacidad-txt">2.3</span> Gal | Km: <span id="km-txt">39.355</span></p>
+      </div>
+    </div>
+
     <!-- Tarjeta Autonomía Estimada -->
-  <div class="card-sesion" style="background: #000000; border-radius: 14px; padding: 18px 15px; margin-bottom: 15px; text-align: center; border: 1px solid #1a1a1a;">
-    <!-- Título Superior -->
-    <div style="font-size: 0.8rem; color: #aaa; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;">
-      AUTONOMÍA ESTIMADA
-    </div>
-
-    <!-- Valor Principal (Verde Neón) -->
-    <div id="autonomia-txt" style="font-size: 2.2rem; font-weight: bold; color: #00ff66; margin: 6px 0 12px 0;">
-      -- km
-    </div>
-
-    <!-- Sub-info (Gris + Blanco en Negrita) -->
-    <div style="font-size: 0.85rem; color: #aaa;">
-      Distancia recorrida: <span id="distancia-recorrida-txt" style="color: #ffffff; font-weight: bold;">0.00 km</span>
-    </div>
-  </div>
-
-  <!-- Pestañas Integradas -->
-  <div class="tabs-header">
-    <button class="tab-btn active" onclick="switchTab('tab-combustible')">Combustible</button>
-    <button class="tab-btn" onclick="switchTab('tab-historial')">Historial Tanqueo</button>
-    <button class="tab-btn" onclick="switchTab('tab-mantenimiento')">Mantenimientos</button>
-  </div>
-
-  <div class="tabs-content">
-    
-    <!-- Pestaña 1: Control Combustible -->
-    <div id="tab-combustible" class="tab-pane active">
-      <div class="form-group">
-        <label for="input-km">Actualizar Kilometraje Actual</label>
-        <input type="number" id="input-km" placeholder="Ej: 12500" inputmode="numeric">
-        <button class="btn" onclick="actualizarKm()">Actualizar Kilometraje</button>
+    <div style="background: #000000; border-radius: 14px; padding: 16px 12px; margin-bottom: 16px; text-align: center; border: 1px solid #222225;">
+      <div style="font-size: 0.75rem; color: #aaa; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">
+        AUTONOMÍA ESTIMADA
       </div>
-
-      <div class="form-group">
-        <label for="input-galones">Agregar Combustible (Galones)</label>
-        <input type="number" step="0.1" id="input-galones" placeholder="Ej: 2.5" inputmode="decimal">
-        <button class="btn btn-secondary" onclick="agregarCombustible()">Cargar Tanque</button>
+      <div id="autonomia-txt" style="font-size: 2.1rem; font-weight: bold; color: #00ff66; margin: 4px 0;">
+        -- km
+      </div>
+      <div style="font-size: 0.82rem; color: #aaa;">
+        Distancia recorrida última sesión: <span id="distancia-recorrida-txt" style="color: #ffffff; font-weight: bold;">0.00 km</span>
       </div>
     </div>
 
-    <!-- Pestaña 2: Historial de Tanqueo -->
-    <div id="tab-historial" class="tab-pane">
-      <label style="margin-bottom:10px;">Registros con Fecha y Hora</label>
-      <ul class="history-list" id="historial-ul"></ul>
+    <!-- Pestañas Integradas (4 Secciones) -->
+    <div class="tabs-header">
+      <button class="tab-btn active" onclick="switchTab(this, 'tab-combustible')">Combustible</button>
+      <button class="tab-btn" onclick="switchTab(this, 'tab-rutas')">Rutas</button>
+      <button class="tab-btn" onclick="switchTab(this, 'tab-tanqueos')">Tanqueos</button>
+      <button class="tab-btn" onclick="switchTab(this, 'tab-mantenimiento')">Mantenimiento</button>
     </div>
 
-    <!-- Pestaña 3: Mantenimientos -->
-    <div id="tab-mantenimiento" class="tab-pane">
-      <div id="lista-mantenimientos"></div>
-      <div class="maint-card" style="margin-bottom: 15px; border-color: var(--accent-color, #4CAF50);">
-        <h4 style="margin: 0 0 10px 0; font-size: 0.9rem; color: #fff;">+ Agregar Nuevo Mantenimiento</h4>
-        <div style="display: flex; flex-direction: column; gap: 8px;">
-          <input type="text" id="input-maint-nombre" placeholder="Pieza / Mantenimiento (ej. Guaya Clutch)" style="padding: 8px; border-radius: 6px; border: 1px solid #333; background: #222; color: #fff;">
-          <input type="number" id="input-maint-intervalo" placeholder="Intervalo en Km (ej. 3000)" style="padding: 8px; border-radius: 6px; border: 1px solid #333; background: #222; color: #fff;">
-          <button onclick="agregarNuevoMantenimiento()" style="padding: 8px; background: #4CAF50; border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer;">
-            Guardar Mantenimiento
+    <div class="tabs-content">
+      
+      <!-- Pestaña 1: Combustible -->
+      <div id="tab-combustible" class="tab-pane active">
+        <div style="margin-bottom: 12px;">
+          <button class="btn" onclick="toggleForm('form-km')">
+            Actualizar Kilometraje
+          </button>
+          <div id="form-km" class="collapsible-content">
+            <input type="number" id="input-km" placeholder="Ej: 12500">
+            <button class="btn" onclick="actualizarKm()">
+              Confirmar Kilometraje
+            </button>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 12px;">
+          <button class="btn btn-green" onclick="toggleForm('form-tanque')">
+            Cargar Tanque
+          </button>
+          <div id="form-tanque" class="collapsible-content">
+            <input type="number" id="input-galones" placeholder="Cantidad en Galones (ej: 1.5)">
+            <button class="btn btn-green" onclick="agregarCombustible()">
+              Confirmar Carga
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pestaña 2: Historial de Rutas (GPS) -->
+      <div id="tab-rutas" class="tab-pane">
+        <label style="margin-bottom:8px; font-weight:bold; color:#00ff66;">📍 Historial de Distancias (GPS)</label>
+        <ul class="history-list" id="historial-distancias-ul"></ul>
+      </div>
+
+      <!-- Pestaña 3: Historial de Tanqueos -->
+      <div id="tab-tanqueos" class="tab-pane">
+        <label style="margin-bottom:8px; font-weight:bold; color:#ffcc00;">⛽ Historial de Tanqueos</label>
+        <ul class="history-list" id="historial-ul"></ul>
+      </div>
+
+      <!-- Pestaña 4: Mantenimientos -->
+      <div id="tab-mantenimiento" class="tab-pane">
+        <div id="lista-mantenimientos"></div>
+        <div class="maint-card" style="margin-bottom: 10px; border-color: #34c759;">
+          <h4 style="margin: 0 0 8px 0; font-size: 0.85rem; color: #fff;">+ Agregar Mantenimiento</h4>
+          <input type="text" id="input-maint-nombre" placeholder="Pieza (ej. Guaya Clutch)">
+          <input type="number" id="input-maint-intervalo" placeholder="Intervalo Km (ej. 3000)">
+          <button class="btn btn-green" onclick="agregarNuevoMantenimiento()" style="padding: 8px; font-size: 0.85rem;">
+            Guardar
           </button>
         </div>
       </div>
-    </div>
 
+    </div>
   </div>
 </div>
 
 <script>
-  
-     const CONFIG = {
-
+  var CONFIG = {
     capacidadTanque: 2.3,
-
     kmPorGalon: 110
-
   };
 
-
-
-    const MANTENIMIENTOS_DEFAULT = [
-
+  var MANTENIMIENTOS_DEFAULT = [
     { id: 'aceite', nombre: 'Cambio de Aceite', intervalo: 800, ultimoKm: 0 },
-
     { id: 'cadena', nombre: 'Tensión de Cadena', intervalo: 100, ultimoKm: 0 },
-
     { id: 'filtro', nombre: 'Filtro de Aire', intervalo: 6000, ultimoKm: 0 },
-
     { id: 'balineras', nombre: 'Balineras', intervalo: 5000, ultimoKm: 0 },
-
-    { id: 'llantas', nombre: 'Revisión / Cambio Llantas', intervalo: 12000, ultimoKm: 0 }
-
+    { id: 'llantas', nombre: 'Revisión Llantas', intervalo: 12000, ultimoKm: 0 }
   ];
 
-
-
-  const datosGuardados = localStorage.getItem('estado_moto_se150');
-
-  let estado = datosGuardados ? JSON.parse(datosGuardados) : {
-
+  var datosGuardados = localStorage.getItem('estado_moto_se150');
+  var estado = datosGuardados ? JSON.parse(datosGuardados) : {
     galonesActuales: 0.5,
-
     kmActual: 39355,
-
-    distanciaSesion: 0, // <-- AHORA SE GUARDA AQUÍ
-
+    distanciaSesion: 0,
     historial: [],
-
+    historialDistancias: [],
     mantenimientos: MANTENIMIENTOS_DEFAULT
-
   };
 
-
-
-  // Reemplaza esta sección en tu JavaScript:
-
-  if (estado.mantenimientos) {
-
-    estado.mantenimientos = MANTENIMIENTOS_DEFAULT.map(mDef => {
-
-      const prev = estado.mantenimientos.find(m => m.id === mDef.id);
-
-      return {
-
-        ...mDef,
-
-        ultimoKm: prev ? prev.ultimoKm : 0
-
-      };
-
-    });
-
+  if (!estado.mantenimientos || estado.mantenimientos.length === 0) {
+    estado.mantenimientos = MANTENIMIENTOS_DEFAULT;
   }
-
-
+  if (!estado.historialDistancias) {
+    estado.historialDistancias = [];
+  }
 
   function guardarEstado() {
-
     localStorage.setItem('estado_moto_se150', JSON.stringify(estado));
-
     renderizar();
-
   }
 
+  function switchTab(btn, tabId) {
+    var btns = document.querySelectorAll('.tab-btn');
+    var panes = document.querySelectorAll('.tab-pane');
 
+    for (var i = 0; i < btns.length; i++) btns[i].className = 'tab-btn';
+    for (var j = 0; j < panes.length; j++) panes[j].className = 'tab-pane';
 
-  function switchTab(tabId) {
-
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-
-    document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
-
-
-
-    event.target.classList.add('active');
-
-    document.getElementById(tabId).classList.add('active');
-
+    btn.className = 'tab-btn active';
+    document.getElementById(tabId).className = 'tab-pane active';
   }
 
-
+  function toggleForm(formId) {
+    var el = document.getElementById(formId);
+    if (!el) return;
+    if (el.className.indexOf('open') !== -1) {
+      el.className = 'collapsible-content';
+    } else {
+      el.className = 'collapsible-content open';
+    }
+  }
 
   function actualizarKm() {
-    const nuevoKmVal = document.getElementById('input-km').value;
-    const nuevoKm = parseFloat(nuevoKmVal);
+    var inputKm = document.getElementById('input-km');
+    var nuevoKmVal = inputKm.value;
+    var nuevoKm = parseFloat(nuevoKmVal);
 
-    // Permitimos ingresar un kilometraje menor para corregir el dato guardado
     if (nuevoKmVal === "" || isNaN(nuevoKm)) {
-        alert("Ingresa un kilometraje válido.");
-        return;
+      alert("Ingresa un kilometraje válido.");
+      return;
     }
 
-    const kmRecorridos = nuevoKm - estado.kmActual;
+    var kmRecorridos = nuevoKm - estado.kmActual;
 
-    // Solo descontamos combustible si se trata de un avance real
     if (kmRecorridos > 0) {
-        const galonesConsumidos = kmRecorridos / CONFIG.kmPorGalon;
-        estado.galonesActuales = Math.max(0, estado.galonesActuales - galonesConsumidos);
+      var galonesConsumidos = kmRecorridos / CONFIG.kmPorGalon;
+      estado.galonesActuales = Math.max(0, estado.galonesActuales - galonesConsumidos);
     }
 
     estado.kmActual = nuevoKm;
-
-    document.getElementById('input-km').value = '';
+    inputKm.value = '';
+    toggleForm('form-km');
     guardarEstado();
-    }
+    mostrarToastKilometraje();
+  }
 
+  function mostrarToastKilometraje() {
+    var toast = document.getElementById('toast-kilometraje');
+    if (!toast) return;
+    toast.style.display = 'block';
+    setTimeout(function() {
+      toast.style.display = 'none';
+    }, 2500);
+  }
 
   function agregarCombustible() {
-    const galonesNuevosVal = document.getElementById('input-galones').value;
-    const galonesNuevos = parseFloat(galonesNuevosVal);
+    var inputGal = document.getElementById('input-galones');
+    var galonesNuevosVal = inputGal.value;
+    var galonesNuevos = parseFloat(galonesNuevosVal);
 
     if (galonesNuevosVal === "" || isNaN(galonesNuevos) || galonesNuevos <= 0) {
       alert("Ingresa una cantidad válida de galones.");
@@ -597,13 +547,8 @@
 
     estado.galonesActuales = Math.min(CONFIG.capacidadTanque, estado.galonesActuales + galonesNuevos);
 
-    const ahora = new Date();
-    const fechaHora = ahora.toLocaleDateString('es-CO', {
-      day: '2-digit', month: '2-digit', year: '2-digit'
-    }) + " " + ahora.toLocaleTimeString('es-CO', {
-      hour: '2-digit', minute: '2-digit', hour12: true
-
-    });
+    var ahora = new Date();
+    var fechaHora = ahora.toLocaleDateString() + " " + ahora.toLocaleTimeString();
 
     estado.historial.unshift({
       fecha: fechaHora,
@@ -611,417 +556,311 @@
       km: estado.kmActual
     });
 
-    document.getElementById('input-galones').value = '';
+    inputGal.value = '';
+    toggleForm('form-tanque');
     guardarEstado();
   }
 
-
   function realizarMantenimiento(id) {
-    const mant = estado.mantenimientos.find(m => m.id === id);
-    if (mant) {
-      mant.ultimoKm = estado.kmActual;
-      guardarEstado();
+    for (var i = 0; i < estado.mantenimientos.length; i++) {
+      if (estado.mantenimientos[i].id === id) {
+        estado.mantenimientos[i].ultimoKm = estado.kmActual;
+        break;
+      }
     }
+    guardarEstado();
+  }
+
+  function formatearDuracion(segundosTotales) {
+    if (segundosTotales < 60) {
+      return segundosTotales + " seg";
+    }
+    var minutos = Math.floor(segundosTotales / 60);
+    var segs = segundosTotales % 60;
+    if (minutos < 60) {
+      return minutos + "m " + segs + "s";
+    }
+    var horas = Math.floor(minutos / 60);
+    var minsRestantes = minutos % 60;
+    return horas + "h " + minsRestantes + "m";
   }
 
   function renderizar() {
     document.getElementById('galones-txt').innerText = estado.galonesActuales.toFixed(1);
     document.getElementById('capacidad-txt').innerText = CONFIG.capacidadTanque.toFixed(1);
-    document.getElementById('km-txt').innerText = estado.kmActual.toLocaleString('es-CO');
+    document.getElementById('km-txt').innerText = Math.round(estado.kmActual);
 
-    const porcentaje = estado.galonesActuales / CONFIG.capacidadTanque;
-    const segmentosActivos = Math.ceil(porcentaje * 6);
+    var porcentaje = estado.galonesActuales / CONFIG.capacidadTanque;
+    var segmentosActivos = Math.round(porcentaje * 6);
 
-    for (let i = 1; i <= 6; i++) {
-      const seg = document.getElementById(`seg-${i}`);
-      if (i <= segmentosActivos) {
-        seg.classList.add('active');
-      } else {
-
-        seg.classList.remove('active');
-
+    for (var i = 1; i <= 6; i++) {
+      var seg = document.getElementById('seg-' + i);
+      if (seg) {
+        if (i <= segmentosActivos) {
+          if (i === 1) {
+            seg.className = 'segment active reserve';
+          } else {
+            seg.className = 'segment active normal';
+          }
+        } else {
+          seg.className = 'segment';
+        }
       }
-
     }
 
-
-
-    const historialUl = document.getElementById('historial-ul');
-
+    // Historial Tanqueos
+    var historialUl = document.getElementById('historial-ul');
     historialUl.innerHTML = '';
 
-    if (estado.historial.length === 0) {
-
-      historialUl.innerHTML = '<li style="color:var(--subtext-color); font-size:0.8rem; text-align:center; padding:10px;">Sin registros de tanqueo.</li>';
-
+    if (!estado.historial || estado.historial.length === 0) {
+      historialUl.innerHTML = '<li style="color:#a1a1a6; font-size:0.8rem; text-align:center; padding:10px;">Sin registros de tanqueo.</li>';
     } else {
-
-      estado.historial.forEach(item => {
-
-        const li = document.createElement('li');
-
+      for (var j = 0; j < estado.historial.length; j++) {
+        var item = estado.historial[j];
+        var li = document.createElement('li');
         li.className = 'history-item';
-
-        li.innerHTML = `
-
-          <div>
-
-            <div><strong>${item.km.toLocaleString('es-CO')} Km</strong></div>
-
-            <div class="date">${item.fecha}</div>
-
-          </div>
-
-          <div class="qty">+${item.galones.toFixed(1)} Gal</div>
-
-        `;
-
+        li.innerHTML = '<div class="left"><div><strong>' + item.km + ' Km</strong></div><div class="date">' + item.fecha + '</div></div><div class="right">+' + item.galones.toFixed(1) + ' Gal</div>';
         historialUl.appendChild(li);
-
-      });
-
+      }
     }
 
+    // Historial Distancias (GPS / Rutas)
+    var distanciasUl = document.getElementById('historial-distancias-ul');
+    distanciasUl.innerHTML = '';
 
+    if (!estado.historialDistancias || estado.historialDistancias.length === 0) {
+      distanciasUl.innerHTML = '<li style="color:#a1a1a6; font-size:0.8rem; text-align:center; padding:10px;">Sin recorridos registrados aún.</li>';
+    } else {
+      for (var d = 0; d < estado.historialDistancias.length; d++) {
+        var r = estado.historialDistancias[d];
+        var liDist = document.createElement('li');
+        liDist.className = 'history-item';
+        liDist.innerHTML = 
+          '<div class="left">' +
+            '<div><strong>' + r.distancia.toFixed(2) + ' km</strong></div>' +
+            '<div class="date">' + r.fecha + ' | ⏱️ ' + r.duracion + '</div>' +
+          '</div>' +
+          '<div class="right" style="color:#00ff66;">' +
+            (r.simulado ? '🧪 SIM' : '🏎️ GPS') +
+          '</div>';
+        distanciasUl.appendChild(liDist);
+      }
+    }
 
-    const mantContainer = document.getElementById('lista-mantenimientos');
-
+    // Mantenimientos
+    var mantContainer = document.getElementById('lista-mantenimientos');
     mantContainer.innerHTML = '';
 
+    for (var k = 0; k < estado.mantenimientos.length; k++) {
+      var m = estado.mantenimientos[k];
+      var kmTranscurridos = estado.kmActual - m.ultimoKm;
+      var kmRestantes = m.intervalo - kmTranscurridos;
+      var requiereAtencion = kmRestantes <= 0;
 
-
-    estado.mantenimientos.forEach(m => {
-
-      const kmTranscurridos = estado.kmActual - m.ultimoKm;
-
-      const kmRestantes = m.intervalo - kmTranscurridos;
-
-      const requiereAtencion = kmRestantes <= 0;
-
-
-
-      const card = document.createElement('div');
-
-      card.className = `maint-card ${requiereAtencion ? 'due' : ''}`;
-
-      card.innerHTML = `
-
-        <div class="maint-header">
-
-          <div class="maint-title">
-
-            ${requiereAtencion ? '<span class="engine-icon" title="Check Engine"></span>' : ''}
-
-            ${m.nombre}
-
-          </div>
-
-          <span class="maint-status ${requiereAtencion ? 'status-alert' : 'status-ok'}">
-
-            ${requiereAtencion ? 'REVISIÓN' : 'OK'}
-
-          </span>
-
-        </div>
-
-        <div class="maint-body">
-
-          <span>Último: ${m.ultimoKm.toLocaleString('es-CO')} Km</span>
-
-          <span>${requiereAtencion ? '¡Vencido por ' + Math.abs(kmRestantes) + ' Km!' : 'Faltan: ' + kmRestantes + ' Km'}</span>
-
-        </div>
-
-        <button class="maint-action" onclick="realizarMantenimiento('${m.id}')">
-
-          Marcar Realizado Hoy (${estado.kmActual} Km)
-
-        </button>
-
-      `;
-
+      var card = document.createElement('div');
+      card.className = 'maint-card' + (requiereAtencion ? ' due' : '');
+      card.innerHTML = 
+        '<div class="maint-header">' +
+          '<div class="maint-title">' + m.nombre + '</div>' +
+          '<span class="maint-status ' + (requiereAtencion ? 'status-alert' : 'status-ok') + '">' + (requiereAtencion ? 'REVISIÓN' : 'OK') + '</span>' +
+        '</div>' +
+        '<div class="maint-body">' +
+          '<span style="float:left;">Último: ' + m.ultimoKm + ' Km</span>' +
+          '<span style="float:right;">' + (requiereAtencion ? '¡Vencido por ' + Math.abs(kmRestantes) + ' Km!' : 'Faltan: ' + kmRestantes + ' Km') + '</span>' +
+        '</div>' +
+        '<button class="maint-action" onclick="realizarMantenimiento(\'' + m.id + '\')">Marcar Realizado Hoy (' + Math.round(estado.kmActual) + ' Km)</button>';
+      
       mantContainer.appendChild(card);
+    }
 
-    });
-
-    // 1. AQUÍ SOLO LLAMAS A LA FUNCIÓN (con paréntesis):
     actualizarAutonomia();
-
-    }
-
-    function actualizarAutonomia() {
-      const kmRestantes = estado.galonesActuales * CONFIG.kmPorGalon;
-      const elAutonomia = document.getElementById('autonomia-txt');
-      const elDistancia = document.getElementById('distancia-recorrida-txt');
-
-      // 1. Actualizar Autonomía y Colores
-      if (elAutonomia) {
-        elAutonomia.innerText = `${kmRestantes.toFixed(1)} km`;
-
-        if (kmRestantes <= 25) {
-          elAutonomia.style.color = "#ff3333";
-        } else if (kmRestantes <= 50) {
-          elAutonomia.style.color = "#ffbb33";
-        } else {
-          elAutonomia.style.color = "#00ff66";
-        }
-      }
-
-      // 2. Actualizar Distancia Recorrida (Variable declarada correctamente)
-      if (elDistancia) {
-        let distancia = 0; // DECLARACIÓN DE VARIABLE
-
-        if (typeof distanciaSesion !== 'undefined') {
-          distancia = distanciaSesion;
-        } else {
-          const elKmSesion = document.getElementById('km-sesion-txt');
-          if (elKmSesion) {
-            distancia = parseFloat(elKmSesion.innerText) || 0;
-          }
-        }
-
-        elDistancia.innerText = `${distancia.toFixed(2)} km`;
-      }
-    }
-    
-  renderizar();
-
-  let gpsWatchId = null;
-
-  let ultimaPosicion = null;
-
-  let kmRecorridosSesion = 0;
-
-  
-
-  // Calcular distancia entre dos coordenadas GPS (Fórmula de Haversine)
-
-  function calcularDistanciaKm(lat1, lon1, lat2, lon2) {
-
-    const R = 6371; // Radio de la Tierra en km
-
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-
-    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-
-              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
-
-              Math.sin(dLon/2) * Math.sin(dLon/2);
-
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-    return R * c;
-
   }
 
-  
+  function actualizarAutonomia() {
+    var kmRestantes = estado.galonesActuales * CONFIG.kmPorGalon;
+    var elAutonomia = document.getElementById('autonomia-txt');
+    var elDistancia = document.getElementById('distancia-recorrida-txt');
+
+    if (elAutonomia) {
+      elAutonomia.innerText = kmRestantes.toFixed(1) + ' km';
+      if (kmRestantes <= 25) {
+        elAutonomia.style.color = "#ff3333";
+      } else if (kmRestantes <= 50) {
+        elAutonomia.style.color = "#ffbb33";
+      } else {
+        elAutonomia.style.color = "#00ff66";
+      }
+    }
+
+    if (elDistancia) {
+      var dist = estado.distanciaSesion || 0;
+      elDistancia.innerText = dist.toFixed(2) + ' km';
+    }
+  }
+
+  /* GPS & Sensores */
+  var gpsWatchId = null;
+  var ultimaPosicion = null;
+  var tiempoInicioSesion = null;
+
+  function calcularDistanciaKm(lat1, lon1, lat2, lon2) {
+    var R = 6371;
+    var dLat = (lat2 - lat1) * Math.PI / 180;
+    var dLon = (lon2 - lon1) * Math.PI / 180;
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+            Math.sin(dLon/2) * Math.sin(dLon/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+  }
 
   function toggleModoConduccion(element) {
-
-    const panel = document.getElementById('panel-conduccion');
-
-    
+    var panel = document.getElementById('panel-conduccion');
 
     if (element.checked) {
-
-      // 1. Activar GPS
-
       if ("geolocation" in navigator) {
-
         panel.style.display = "block";
-
-        kmRecorridosSesion = 0;
-
         ultimaPosicion = null;
+        estado.distanciaSesion = 0;
+        tiempoInicioSesion = new Date();
 
         document.getElementById('km-sesion-txt').innerText = "0.00 km";
 
-  
-
         gpsWatchId = navigator.geolocation.watchPosition(
-
-          (pos) => {
-
-            const lat = pos.coords.latitude;
-
-            const lon = pos.coords.longitude;
-
-            const velocidadMps = pos.coords.speed || 0; // m/s
-
-            const velocidadKmh = Math.round(velocidadMps * 3.6);
-
+          function(pos) {
+            var lat = pos.coords.latitude;
+            var lon = pos.coords.longitude;
+            var velocidadMps = pos.coords.speed || 0;
+            var velocidadKmh = Math.round(velocidadMps * 3.6);
             
-
-            document.getElementById('vel-txt').innerText = `${velocidadKmh} km/h`;
-
-  
+            document.getElementById('vel-txt').innerText = velocidadKmh + " km/h";
 
             if (ultimaPosicion) {
-
-              const dist = calcularDistanciaKm(ultimaPosicion.lat, ultimaPosicion.lon, lat, lon);
-
-              // Filtrar pequeño ruido del GPS cuando estás detenido
-
+              var dist = calcularDistanciaKm(ultimaPosicion.lat, ultimaPosicion.lon, lat, lon);
               if (dist > 0.005) { 
-
-                kmRecorridosSesion += dist;
-
-                estado.kmActual = parseFloat((estado.kmActual + dist).toFixed(1));
-
+                estado.kmActual = parseFloat((estado.kmActual + dist).toFixed(2));
+                estado.distanciaSesion = (estado.distanciaSesion || 0) + dist;
                 
-
-                // Descontar combustible proporcionalmente
-
-                const galonesConsumidos = dist / CONFIG.kmPorGalon;
-
+                var galonesConsumidos = dist / CONFIG.kmPorGalon;
                 estado.galonesActuales = Math.max(0, estado.galonesActuales - galonesConsumidos);
-
-                estado.distanciaSesion += kmIncrementados;
-
                 
-
                 guardarEstado();
-
-                document.getElementById('km-sesion-txt').innerText = `${kmRecorridosSesion.toFixed(2)} km`;
-
+                document.getElementById('km-sesion-txt').innerText = estado.distanciaSesion.toFixed(2) + " km";
               }
-
             }
-
-            ultimaPosicion = { lat, lon };
-
+            ultimaPosicion = { lat: lat, lon: lon };
           },
-
-          (err) => alert("Error al acceder al GPS. Asegúrate de dar permisos de ubicación."),
-
-          { enableHighAccuracy: true, maximumAge: 1000, timeout: 5000 }
+          function(err) { 
+            alert("Error GPS (" + err.code + "): " + err.message); 
+          },
+          { enableHighAccuracy: false, maximumAge: 3000, timeout: 15000 }
         );
       } else {
         alert("Tu navegador no soporta GPS.");
         element.checked = false;
       }
-      // 2. Activar Acelerómetro para inclinación en curvas
-
       activarAcelerometro();
     } else {
-      // Apagar modo conducción
       panel.style.display = "none";
       if (gpsWatchId !== null) {
         navigator.geolocation.clearWatch(gpsWatchId);
         gpsWatchId = null;
       }
       window.removeEventListener('devicemotion', manejarInclinacion);
-      alert(`Modo Conducción finalizado. Recorriste ${kmRecorridosSesion.toFixed(2)} km.`);
-    }
-  }  
 
-  function activarAcelerometro() {
+      var distanciaFinal = estado.distanciaSesion || 0;
+      if (distanciaFinal > 0 && tiempoInicioSesion) {
+        var tiempoFin = new Date();
+        var segundosDuracion = Math.round((tiempoFin - tiempoInicioSesion) / 1000);
+        var duracionTexto = formatearDuracion(segundosDuracion);
+        var fechaHoraTexto = tiempoFin.toLocaleDateString() + " " + tiempoFin.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
-    if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
-      DeviceMotionEvent.requestPermission().then(res => {
-        if (res === 'granted') window.addEventListener('devicemotion', manejarInclinacion);
-      });
-    } else {
-      window.addEventListener('devicemotion', manejarInclinacion);
+        estado.historialDistancias.unshift({
+          fecha: fechaHoraTexto,
+          distancia: distanciaFinal,
+          duracion: duracionTexto,
+          simulado: false
+        });
+
+        guardarEstado();
+      }
+
+      alert("Modo Conducción finalizado. Recorriste " + distanciaFinal.toFixed(2) + " km.");
     }
   }
-  
+
+  function activarAcelerometro() {
+    window.addEventListener('devicemotion', manejarInclinacion);
+  }
 
   function manejarInclinacion(event) {
-    const x = event.accelerationIncludingGravity.x || 0;
-    const y = event.accelerationIncludingGravity.y || 0;
-
-    // Grados de inclinación lateral
-    const angulo = Math.round(Math.atan2(x, y) * (180 / Math.PI));
-    document.getElementById('inc-txt').innerText = `${Math.abs(angulo)}°`;
+    var x = event.accelerationIncludingGravity ? event.accelerationIncludingGravity.x || 0 : 0;
+    var y = event.accelerationIncludingGravity ? event.accelerationIncludingGravity.y || 0 : 0;
+    var angulo = Math.round(Math.atan2(x, y) * (180 / Math.PI));
+    document.getElementById('inc-txt').innerText = Math.abs(angulo) + "°";
   }
 
   function agregarNuevoMantenimiento() {
-      const nombreInput = document.getElementById('input-maint-nombre').value.trim();
-      const intervaloVal = document.getElementById('input-maint-intervalo').value;
-      const intervalo = parseFloat(intervaloVal);
+    var nombreInput = document.getElementById('input-maint-nombre').value;
+    var intervaloVal = document.getElementById('input-maint-intervalo').value;
+    var intervalo = parseFloat(intervaloVal);
 
-      if (!nombreInput || isNaN(intervalo) || intervalo <= 0) {
-        alert("Por favor ingresa un nombre válido y un intervalo de kilómetros mayor a 0.");
-        return;
-      }
-
-      // Genera un ID único para la nueva pieza
-      const nuevoId = 'maint_' + Date.now();
-
-      const nuevoMantenimiento = {
-        id: nuevoId,
-        nombre: nombreInput,
-        intervalo: intervalo,
-        ultimoKm: estado.kmActual // Inicia desde el kilometraje actual
-      };
-
-      estado.mantenimientos.push(nuevoMantenimiento);
-
-      // Limpia los campos de entrada
-      document.getElementById('input-maint-nombre').value = '';
-      document.getElementById('input-maint-intervalo').value = '';
-
-      guardarEstado();
+    if (!nombreInput || isNaN(intervalo) || intervalo <= 0) {
+      alert("Ingresa un nombre e intervalo válido.");
+      return;
     }
 
-    let intSimulacion = null;
+    estado.mantenimientos.push({
+      id: 'maint_' + new Date().getTime(),
+      nombre: nombreInput,
+      intervalo: intervalo,
+      ultimoKm: estado.kmActual
+    });
 
-    function simularRecorrido20Km() {
-      // 1. Activar switch en interfaz
-      const switchConduccion = document.getElementById('toggle-conduccion');
-      if (switchConduccion && !switchConduccion.checked) {
-        switchConduccion.checked = true;
-        const panel = document.getElementById('panel-conduccion');
-        if (panel) panel.style.display = "block";
-      }
+    document.getElementById('input-maint-nombre').value = '';
+    document.getElementById('input-maint-intervalo').value = '';
+    guardarEstado();
+  }
 
-      // 2. Desconectar GPS real si estaba activo para evitar interferencias
-      if (gpsWatchId !== null) {
-        navigator.geolocation.clearWatch(gpsWatchId);
-        gpsWatchId = null;
-      }
-
-      // 3. Forzar reinicio de datos en memoria local a 39.423 Km
-      estado.kmActual = 39423.0;
-      guardarEstado();
-
-      const kmPorSegundo = 20 / 60; // Avanza ~0.33 km por segundo
-      let distSimuladaSesion = 0;
-      let pasos = 0;
-
-      if (intSimulacion) clearInterval(intSimulacion);
-
-      intSimulacion = setInterval(() => {
-        pasos++;
-        distSimuladaSesion += kmPorSegundo;
-
-        // Actualiza datos visibles
-        const velEl = document.getElementById('vel-txt');
-        if (velEl) velEl.innerText = "5 km/h";
-
-        // Suma controlada de a 0.33 Km
-        estado.kmActual = parseFloat((estado.kmActual + kmPorSegundo).toFixed(1));
-
-        // Consumo proporcional de gasolina
-        const galonesConsumidos = kmPorSegundo / CONFIG.kmPorGalon;
-        estado.galonesActuales = Math.max(0, estado.galonesActuales - galonesConsumidos);
-
-        guardarEstado();
-
-        const kmSesionEl = document.getElementById('km-sesion-txt');
-        if (kmSesionEl) kmSesionEl.innerText = `${distSimuladaSesion.toFixed(1)} km`;
-
-        // Finalizar al completar los 60 segundos (20 km)
-        if (pasos >= 60) {
-          clearInterval(intSimulacion);
-          alert("¡Simulación completada! Se sumaron 20.0 Km exitosamente.");
-        }
-      }, 1000);
+  /* 🧪 SIMULACRO DESDE CONSOLA */
+  function simularRecorrido(distanciaKm, minutosDuracion) {
+    var km = parseFloat(distanciaKm);
+    if (isNaN(km) || km <= 0) {
+      console.error("❌ Por favor ingresa una distancia válida en Km. Ejemplo: simularRecorrido(10)");
+      return;
     }
+
+    var duracionMin = minutosDuracion ? parseInt(minutosDuracion) : Math.floor(Math.random() * 15) + 5;
+    var segundosTotales = duracionMin * 60;
+    var duracionTexto = formatearDuracion(segundosTotales);
+
+    estado.kmActual = parseFloat((estado.kmActual + km).toFixed(2));
+    estado.distanciaSesion = km;
+
+    var galonesConsumidos = km / CONFIG.kmPorGalon;
+    estado.galonesActuales = Math.max(0, estado.galonesActuales - galonesConsumidos);
+
+    var ahora = new Date();
+    var fechaHoraTexto = ahora.toLocaleDateString() + " " + ahora.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+
+    estado.historialDistancias.unshift({
+      fecha: fechaHoraTexto,
+      distancia: km,
+      duracion: duracionTexto,
+      simulado: true
+    });
+
+    guardarEstado();
+
+    console.log("%c✅ Simulacro Exitoso", "color: #00ff66; font-size: 14px; font-weight: bold;");
+    console.log("📍 Distancia añadida: " + km + " km");
+    console.log("⏱️ Duración simulada: " + duracionTexto);
+    console.log("⛽ Galones consumidos: " + galonesConsumidos.toFixed(3) + " Gal");
+    console.log("📊 Km actual de la moto: " + estado.kmActual + " km");
+  }
+
+  // Carga inicial
+  renderizar();
 </script>
-
 </body>
 </html>
