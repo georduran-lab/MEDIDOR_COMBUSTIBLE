@@ -503,6 +503,8 @@
 
     kmActual: 39355,
 
+    distanciaSesion: 0, // <-- AHORA SE GUARDA AQUÍ
+
     historial: [],
 
     mantenimientos: MANTENIMIENTOS_DEFAULT
@@ -748,14 +750,14 @@
     }
 
     function actualizarAutonomia() {
+      const kmRestantes = estado.galonesActuales * CONFIG.kmPorGalon;
       const elAutonomia = document.getElementById('autonomia-txt');
       const elDistancia = document.getElementById('distancia-recorrida-txt');
 
+      // 1. Actualizar Autonomía y Colores
       if (elAutonomia) {
-        const kmRestantes = estado.galonesActuales * CONFIG.kmPorGalon;
         elAutonomia.innerText = `${kmRestantes.toFixed(1)} km`;
 
-        // Lógica de colores según nivel de reserva
         if (kmRestantes <= 25) {
           elAutonomia.style.color = "#ff3333";
         } else if (kmRestantes <= 50) {
@@ -765,8 +767,11 @@
         }
       }
 
-      // Actualizar la distancia recorrida en la sub-línea
-      if (typeof distanciaSesion !== 'undefined') {
+      // 2. Actualizar Distancia Recorrida (Variable declarada correctamente)
+      if (elDistancia) {
+        let distancia = 0; // DECLARACIÓN DE VARIABLE
+
+        if (typeof distanciaSesion !== 'undefined') {
           distancia = distanciaSesion;
         } else {
           const elKmSesion = document.getElementById('km-sesion-txt');
@@ -777,10 +782,9 @@
 
         elDistancia.innerText = `${distancia.toFixed(2)} km`;
       }
+    }
     
   renderizar();
-
-
 
   let gpsWatchId = null;
 
@@ -873,6 +877,8 @@
                 const galonesConsumidos = dist / CONFIG.kmPorGalon;
 
                 estado.galonesActuales = Math.max(0, estado.galonesActuales - galonesConsumidos);
+
+                estado.distanciaSesion += kmIncrementados;
 
                 
 
