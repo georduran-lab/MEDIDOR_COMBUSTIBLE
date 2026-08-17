@@ -1,0 +1,18 @@
+// Function helper to simulate trips with precise distance, duration, and average speed
+function probarRecorrido(distanciaKm, minutosDuracion) {
+  if (typeof simularRecorrido === 'function') {
+    simularRecorrido(distanciaKm, minutosDuracion);
+  } else {
+    console.error("❌ No se encontró la función 'simularRecorrido'. Asegúrate de estar en la aplicación.");
+  }
+}
+
+// 1. Prueba rápida: 15.5 km en 25 minutos
+console.log("--- Ejecutando Prueba 1 ---");
+probarRecorrido(15.5, 25);
+
+// 2. Prueba de ruta larga: 42.0 km en 50 minutos
+// probarRecorrido(42.0, 50);
+
+// 3. Prueba de tramo corto / urbano: 3.2 km en 8 minutos
+// probarRecorrido(3.2, 8);
