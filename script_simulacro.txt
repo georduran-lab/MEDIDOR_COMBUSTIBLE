@@ -1,3 +1,5 @@
+//SCRIPT_1
+
 // Function helper to simulate trips with precise distance, duration, and average speed
 function probarRecorrido(distanciaKm, minutosDuracion) {
   if (typeof simularRecorrido === 'function') {
@@ -16,3 +18,81 @@ probarRecorrido(15.5, 25);
 
 // 3. Prueba de tramo corto / urbano: 3.2 km en 8 minutos
 // probarRecorrido(3.2, 8);
+
+
+//SCRIPT_2 CON ANIMACION
+
+// Script de Simulación Animada en Tiempo Real
+function simularRecorridoAnimado(distanciaMetaKm, minutosSimulados, intervaloSeg = 0.5) {
+  if (typeof estado === 'undefined' || typeof guardarEstado === 'undefined') {
+    console.error("❌ Asegúrate de estar en la página de la aplicación.");
+    return;
+  }
+
+  let pasosTotales = Math.max(5, Math.round(minutosSimulados));
+  let kmPorPaso = distanciaMetaKm / pasosTotales;
+  let pasoActual = 0;
+  let kmRecorridos = 0;
+  let tiempoInicio = new Date();
+
+  // Activar visualmente el panel de conducción
+  let panel = document.getElementById('panel-conduccion');
+  let toggle = document.getElementById('toggle-conduccion');
+  if (panel) panel.style.display = 'block';
+  if (toggle) toggle.checked = true;
+
+  console.log(`🚀 %cIniciando prueba animada: ${distanciaMetaKm} km en ${minutosSimulados} min...`, "color: #00ff66; font-weight: bold;");
+
+  let timer = setInterval(() => {
+    pasoActual++;
+    kmRecorridos += kmPorPaso;
+    
+    // Simular actualización de estado
+    estado.kmActual = parseFloat((estado.kmActual + kmPorPaso).toFixed(1));
+    estado.distanciaSesion = parseFloat(kmRecorridos.toFixed(1));
+    
+    let galonesConsumidos = kmPorPaso / CONFIG.kmPorGalon;
+    estado.galonesActuales = Math.max(0, estado.galonesActuales - galonesConsumidos);
+
+    // Cálculos de velocidad simulada
+    let horasSimuladasTranscurridas = (pasoActual / pasosTotales) * (minutosSimulados / 60);
+    let velPromedio = (kmRecorridos / horasSimuladasTranscurridas).toFixed(1);
+    let velInstantanea = Math.round(parseFloat(velPromedio) + (Math.random() * 6 - 3)); // Pequeña variación realista
+
+    // Actualizar elementos visuales en pantalla
+    document.getElementById('km-sesion-txt').innerText = estado.distanciaSesion.toFixed(1) + " km";
+    document.getElementById('vel-txt').innerText = velInstantanea + " km/h";
+    document.getElementById('vel-prom-txt').innerText = velPromedio + " km/h";
+    
+    guardarEstado();
+
+    console.log(`⏱️ paso ${pasoActual}/${pasosTotales} | Recorrido: ${estado.distanciaSesion} km | Vel. Prom: ${velPromedio} km/h`);
+
+    // Finalizar animación
+    if (pasoActual >= pasosTotales) {
+      clearInterval(timer);
+      
+      // Registrar en historial
+      let duracionTexto = formatearDuracion(minutosSimulados * 60);
+      let ahora = new Date();
+      let fechaHoraTexto = ahora.toLocaleDateString() + " " + ahora.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+
+      estado.historialDistancias.unshift({
+        fecha: fechaHoraTexto,
+        distancia: estado.distanciaSesion,
+        duracion: duracionTexto,
+        velPromedio: velPromedio,
+        simulado: true
+      });
+
+      guardarEstado();
+
+      if (toggle) toggle.checked = false;
+      console.log("%c✅ Recorrido finalizado y guardado en la pestaña Rutas.", "color: #00ff66; font-size: 13px; font-weight: bold;");
+    }
+  }, intervaloSeg * 1000);
+}
+
+// 🎬 EJECUTAR ANIMACIÓN: (Distancia en Km, Minutos simulados, Velocidad del timer en segundos)
+// Ejemplo: Simula 12.5 Km recorridos en 20 Minutos (avanza un paso cada 0.5 segundos)
+simularRecorridoAnimado(12.5, 20, 0.5);
